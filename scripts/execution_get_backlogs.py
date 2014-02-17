@@ -1,7 +1,7 @@
 from AAA_sched_unsched import *
 
 # Calculate facility backlogs
-path = '/users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/'
+path = '../db/'
 get_facility_db(path)
 #print facility_data_db
 

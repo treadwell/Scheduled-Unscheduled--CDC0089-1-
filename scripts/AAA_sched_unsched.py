@@ -199,7 +199,7 @@ def fac_to_csv(date):
 def fac_to_db(facility, date):
     '''updates data from all files in a directory to a database'''
     name = "facility_data.db"
-    path = "/users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/"
+    path = "../db/"
     schema = "(date integer, new integer, sched integer, unsched integer, ship integer, susp integer, old integer, future integer, hold integer)"
     conn = sqlite3.connect(path + name)
     c = conn.cursor()
@@ -237,14 +237,14 @@ def populate_database():
             fac_to_db(location, date)    
     print "database update completed"
 
-def incr_db_update(path):
+def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.  This supercedes the bulk update approach above.'''
     # retrieve db records
-    get_facility_db(path)
+    get_facility_db('../db/')
 
     # retrieve data from files
-    read_dir(path)
+    read_dir('../data/')
 
     # determine missing records from database
     missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
@@ -262,7 +262,7 @@ def incr_db_update(path):
 def wipe_tables():
     '''Wipes all tables in database. Used to clear duplicate records created during debugging.'''
     name = "facility_data.db"
-    path = "/users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/"
+    path = "../db/"
     schema = "(date integer, new integer, sched integer, unsched integer, ship integer, susp integer, old integer, future integer, hold integer)"
     conn = sqlite3.connect(path + name)
     c = conn.cursor()

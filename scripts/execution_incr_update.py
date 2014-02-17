@@ -1,11 +1,11 @@
 from AAA_sched_unsched import *
 
-path = "/users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/"
+path_to_db = "../db/"
 
 print "Pre-update records"
-print count_db_records(path)
+print count_db_records(path_to_db)
 
-incr_db_update(path)
+incr_db_update()
 
 print "Post-update records"
-print count_db_records(path)
+print count_db_records(path_to_db)
