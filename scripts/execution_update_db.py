@@ -1,4 +1,5 @@
-from AAA_sched_unsched import *
+from input_files import *
+from input_db import *
 
 #  update data from directory
 path_to_db = '../db/'

@@ -1,5 +1,5 @@
-from AAA_sched_unsched import *
+from db_maintenance import *
 
-path = '/users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/'
+path = '../db/'
 
 print count_db_records(path)

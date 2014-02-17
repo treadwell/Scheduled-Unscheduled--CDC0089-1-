@@ -1,3 +1,3 @@
-from AAA_sched_unsched import *
+from db_maintenance import *
 
 wipe_tables()
