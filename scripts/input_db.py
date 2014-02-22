@@ -1,3 +1,4 @@
+from datetime import datetime
 import sqlite3
 from processing import *
 
@@ -20,6 +21,6 @@ def get_facility_db(path):
         data = c.fetchall()
         for d in data:
             d_key = (facility, str(d[0]))
-            d_value = Facility(str(d[0]), facility, d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
+            d_value = Facility(datetime.strptime(d[0], '%Y-%m-%d').date(), facility, d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
             facility_data_db[d_key] = d_value
     return facility_data_db

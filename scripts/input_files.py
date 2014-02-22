@@ -1,3 +1,7 @@
+import re
+import os
+from datetime import datetime
+from re import sub
 from processing import *
 ### Input Layer ###
 
@@ -54,4 +58,18 @@ def read_dir(path):
     data_files = [file for file in files if 'CDC0089' in file]
     for file in data_files:
         read_file(path, file)
+
+if __name__ == '__main__':
+    path = "../test_data/"
+    read_dir(path)
+    assert len(facility_data) == 78
+
+    filename = "CDC0089 01-01-14.txt"
+    facility_data = {}
+
+    date, info = read_file(path, filename)
+    assert date == "2014-01-01"
+    assert info[('ASH', '2014-01-01')].sched == 49
+
+
     

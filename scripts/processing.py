@@ -23,8 +23,8 @@ class Facility(object):
         # this is a schema
 
         self.date = date
-        #  assert location in ('GAH', 'ASH', 'GRO')
         self.location = location
+        assert location in ('GAH', 'ASH', 'GRO')
         self.new = new
         self.sched = sched
         self.unsched = unsched
@@ -77,7 +77,18 @@ def calc_facility_backlog(facility, facility_data_db):
     
     return facility_list[-1]
 
-def plot_facility_trends(facility):
-    # print daily orders processed, MA processing, orders in process, backlog
-    # plot all of that
-    pass
+def plot_facility_trends(facility, facility_data_db):
+    '''Plots trends of processing, MA processing, orders in process and shipping over time'''
+    # Accept only "GAH", "ASH", "GRO"
+    # Cycle through facility_data_db, pulling values for facility into a list
+    facility_list = [value for value in facility_data_db.values() if value.location == facility]
+    
+    # calculate the orders in process
+    for date_object in facility_list:
+        date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
+  
+    # order the list by date
+    facility_list.sort(key=lambda x: x.date)
+    for d in facility_list:
+        print d.date, d.ship
+    
