@@ -1,4 +1,4 @@
-import sqlite3
+#import sqlite3 # probably shouldn't be used in processing
 from output_db import *
 from input_db import *
 from input_files import *
@@ -46,9 +46,9 @@ class Facility(object):
 
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
-    the missing data in the database.  This supercedes the bulk update approach above.'''
+    the missing data in the database.'''
     # retrieve db records
-    get_facility_db('../db/')
+    get_facility_db('../db/', Facility)
 
     # retrieve data from files
     read_dir('../data/')
