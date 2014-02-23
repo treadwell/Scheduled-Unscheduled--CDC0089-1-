@@ -48,10 +48,10 @@ def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
     # retrieve db records
-    i_db.get_facility_db('../db/')
+    facility_data_db = i_db.get_facility_db('../db/')
 
     # retrieve data from files
-    i_files.read_dir('../data/')
+    facility_data = i_files.read_dir('../data/')
 
     # determine missing records from database
     missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
