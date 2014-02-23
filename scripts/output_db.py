@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def fac_to_db(facility, date):
+def fac_to_db(facility, date, facility_data):
     '''updates data from all files in a directory to a database'''
     name = "facility_data.db"
     path = "../db/"
@@ -16,17 +16,17 @@ def fac_to_db(facility, date):
     elif facility == "GRO":
         table = "Groveport"
     else:
-        raise UnsupportedFacility
+        raise UnsupportedFacilityException
         
     # create table if it doesn't exist
     c.execute('''CREATE TABLE IF NOT EXISTS ''' + table + schema)
     
-    c.execute("INSERT INTO " + table + " VALUES " + str(insert_tuple(facility,date)))
+    c.execute("INSERT INTO " + table + " VALUES " + str(insert_tuple(facility,date, facility_data)))
     conn.commit()
     conn.close()
     return
 
-def insert_tuple(facility,date):
+def insert_tuple(facility,date, facility_data):
     '''Creates a tuple of facility data for insertion into a database'''
     f = facility_data[(facility,date)]
     return (f.date, f.new, f.sched, f.unsched, f.ship, f.susp, f.old, f.future, f.hold)

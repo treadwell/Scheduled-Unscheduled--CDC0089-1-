@@ -23,7 +23,7 @@ def read_dir(path):
     return facility_data
     
 def read_file(path, filename):
-    '''Parses text file, creating dictionary of Facility objects'''
+    '''Parses text file, creating dictionary of Daily_Prodn objects'''
     file_data = {}
     with open(path + filename) as f:
         # alternative: pull things directly by line number
@@ -56,7 +56,7 @@ def read_file(path, filename):
             else:
                 order_type_data_1.append(int(sub(r'[^\d.]', '', d)))
 
-        file_data[(L,date)] = p.Facility(date, L, *order_type_data_1)
+        file_data[(L,date)] = p.Daily_Prodn(date, L, *order_type_data_1)
 
     return file_data
 
