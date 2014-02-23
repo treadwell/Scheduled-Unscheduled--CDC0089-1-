@@ -10,6 +10,8 @@ GAH_today = calc_facility_backlog("GAH", facility_data_db)
 ASH_today = calc_facility_backlog("ASH", facility_data_db)
 GRO_today = calc_facility_backlog("GRO", facility_data_db)
 
+print GAH_today.date
+print "----------"
 print "GAH new:", GAH_today.new, "sched:", GAH_today.sched,  "backlog:", GAH_today.backlog
 print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
 print "GRO new:", GRO_today.new, "sched:", GRO_today.sched,  "backlog:", GRO_today.backlog

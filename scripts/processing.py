@@ -76,7 +76,6 @@ def calc_facility_backlog(facility, facility_data_db):
   
     # order the list by date
     facility_list.sort(key=lambda x: x.date)
-    print "---------------------------"
     
     # calculate moving average processing (eliminating zeros)
     for i, date_object in enumerate(facility_list):
