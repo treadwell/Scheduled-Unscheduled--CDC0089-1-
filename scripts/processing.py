@@ -5,7 +5,7 @@ import input_files as i_files
 
 ### Processing Layer ###
 
-class Facility(object):
+class Daily_Prodn(object):
     def __init__(self, date, location, new, sched,
                  unsched, ship, susp, old, future, hold):
         
@@ -36,8 +36,10 @@ class Facility(object):
         self.ship = ship
         self.susp = susp
         self.old = old
+        #assert old > susp
         self.future = future
         self.hold = hold
+        self.in_process = sched + unsched + old + future + hold
     
     def __repr__(self):
         return str(self.__dict__)
@@ -59,7 +61,7 @@ def incr_db_update():
 
     # updates db with missing records
     for r in missing_records:
-        o_db.fac_to_db(r[0],r[1])
+        o_db.fac_to_db(r[0],r[1], facility_data)
         
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)
@@ -71,8 +73,8 @@ def calc_facility_backlog(facility, facility_data_db):
     facility_list = [value for value in facility_data_db.values() if value.location == facility]
     
     # calculate the orders in process
-    for date_object in facility_list:
-        date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
+    #for date_object in facility_list:
+    #    date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
   
     # order the list by date
     facility_list.sort(key=lambda x: x.date)
