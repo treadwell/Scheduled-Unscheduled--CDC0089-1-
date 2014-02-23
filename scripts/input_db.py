@@ -1,8 +1,9 @@
+import processing as p
 from datetime import datetime
 import sqlite3
 
 
-def get_facility_db(path, cls):
+def get_facility_db(path):
     '''retrieve data from database into Facility objects'''
     facility_data_db = {}
     name = "facility_data.db"
@@ -19,6 +20,12 @@ def get_facility_db(path, cls):
         data = c.fetchall()
         for d in data:
             d_key = (facility, str(d[0]))
-            d_value = cls(datetime.strptime(d[0], '%Y-%m-%d').date(), facility, d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
+            d_value = p.Facility(datetime.strptime(d[0], '%Y-%m-%d').date(), facility, d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
             facility_data_db[d_key] = d_value
     return facility_data_db
+
+if __name__ == '__main__':
+    print "------------------- Unit tests -------------------"
+    path = "../test_db/"
+    assert get_facility_db(path)[("GAH","2014-01-15")].sched == 4520
+
