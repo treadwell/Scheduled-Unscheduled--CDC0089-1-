@@ -1,3 +1,8 @@
+import sqlite3
+from output_db import *
+from input_db import *
+from input_files import *
+
 ### Processing Layer ###
 
 class Facility(object):
@@ -38,6 +43,26 @@ class Facility(object):
         return str(self.__dict__)
 
     # __str__ = __repr__ ## uncomment this if printing doesn't work well 
+
+def incr_db_update():
+    '''Compares records in a database with data available from a directory and updates
+    the missing data in the database.  This supercedes the bulk update approach above.'''
+    # retrieve db records
+    get_facility_db('../db/')
+
+    # retrieve data from files
+    read_dir('../data/')
+
+    # determine missing records from database
+    missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
+    print missing_records
+
+    # updates db with missing records
+    for r in missing_records:
+        fac_to_db(r[0],r[1])
+        
+    # checks
+        assert len(facility_data_db) + len(missing_records) == len(facility_data)
 
 def calc_facility_backlog(facility, facility_data_db):
     '''Calculates backlog in a facility over time and returns most recent backlog'''
