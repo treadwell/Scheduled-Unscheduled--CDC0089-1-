@@ -16,6 +16,7 @@ order_type_names = ['new', 'sched', 'unsched', 'ship', 'susp', 'old', 'future', 
 L_names = {'GAH':[52,60], 'ASH':[90,96], 'GRO':[126,132]} 
     
 facility_data = {}
+
 def read_file(path, filename):
     '''Parses text file, creating dictionary of Facility objects'''
     with open(path + filename) as f:
@@ -82,7 +83,7 @@ def get_facility_db(path):
             d_key = (facility, str(d[0]))
             d_value = Facility(datetime.strptime(d[0], '%Y-%m-%d'), facility, d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
             facility_data_db[d_key] = d_value
-
+    return facility_data_db
 
 ### Output Layer ###
 
