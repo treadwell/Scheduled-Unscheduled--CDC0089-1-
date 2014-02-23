@@ -1,6 +1,5 @@
-from output_db import *
-from processing import *
-from db_maintenance import *
+import processing as p
+import db_maintenance as db_m
 
 ''' This script compares the data in files versus the data in the db and updates
     the db with new or missing data'''
@@ -8,9 +7,9 @@ from db_maintenance import *
 path_to_db = "../db/"
 
 print "Pre-update records"
-print count_db_records(path_to_db)
+print db_m.count_db_records(path_to_db)
 
-incr_db_update()
+p.incr_db_update()
 
 print "Post-update records"
-print count_db_records(path_to_db)
+print db_m.count_db_records(path_to_db)

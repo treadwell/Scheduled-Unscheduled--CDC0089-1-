@@ -1,7 +1,7 @@
-import sqlite3
-from output_db import *
-from input_db import *
-from input_files import *
+#import sqlite3 # probably shouldn't be used in processing
+import output_db as o_db
+import input_db as i_db
+import input_files as i_files
 
 ### Processing Layer ###
 
@@ -46,12 +46,12 @@ class Facility(object):
 
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
-    the missing data in the database.  This supercedes the bulk update approach above.'''
+    the missing data in the database.'''
     # retrieve db records
-    get_facility_db('../db/')
+    i_db.get_facility_db('../db/')
 
     # retrieve data from files
-    read_dir('../data/')
+    i_files.read_dir('../data/')
 
     # determine missing records from database
     missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
@@ -59,7 +59,7 @@ def incr_db_update():
 
     # updates db with missing records
     for r in missing_records:
-        fac_to_db(r[0],r[1])
+        o_db.fac_to_db(r[0],r[1])
         
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)

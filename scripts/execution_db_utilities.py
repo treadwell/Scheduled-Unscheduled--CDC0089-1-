@@ -1,5 +1,6 @@
-from db_maintenance import *
+import db_maintenance as db_m
 
 path = '../db/'
 
-print count_db_records(path)
+print db_m.count_db_records(path)
+
