@@ -17,11 +17,12 @@ print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_tod
 print "GRO new:", GRO_today.new, "sched:", GRO_today.sched,  "backlog:", GRO_today.backlog
 print "GRO inprocess_test", GRO_today.in_process
 
-p.plot_facility_trends("GAH", facility_data_db)
+#p.plot_facility_trends("GAH", facility_data_db)
 
 # Other things to look at:
 #  ratio of unscheduled to scheduled (is work being pulled fast enough to keep up with backlog)
 #  instantaneous backlog
 #  smoothed backlog (more responsive than MA10). Use Loess?
 #  trend in shipping, backlog, in process, new
+#  backlog at max production - what's the best way to determine this?  How much can you ramp up a facility in one day?
 
