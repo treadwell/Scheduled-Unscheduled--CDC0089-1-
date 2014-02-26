@@ -12,12 +12,14 @@ GRO_today = p.calc_facility_backlog("GRO", facility_data_db)
 
 print GAH_today.date
 print "----------"
-print "GAH new:", GAH_today.new, "sched:", GAH_today.sched,  "backlog:", GAH_today.backlog
-print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
-print "GRO new:", GRO_today.new, "sched:", GRO_today.sched,  "backlog:", GRO_today.backlog
-print "GRO inprocess_test", GRO_today.in_process
+print "GAH new:", GAH_today.new, "in process:", GAH_today.in_process, "sched:", GAH_today.sched,  "backlog:", GAH_today.backlog
+print "ASH new:", ASH_today.new, "in process:", ASH_today.in_process, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
+print "GRO new:", GRO_today.new, "in process:", GRO_today.in_process, "sched:", GRO_today.sched,  "backlog:", GRO_today.backlog
 
-#p.plot_facility_trends("GAH", facility_data_db)
+
+p.plot_facility_trends("GAH", "new")
+p.plot_facility_trends("GRO", "new")
+p.plot_facility_trends("ASH", "new")
 
 # Other things to look at:
 #  ratio of unscheduled to scheduled (is work being pulled fast enough to keep up with backlog)
