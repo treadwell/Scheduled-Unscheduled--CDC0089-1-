@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 import output_db as o_db
 import input_db as i_db
 import input_files as i_files
@@ -125,6 +126,7 @@ def create_data_frame(facility, facility_data_db):
                  for f in facility_data_db.values() if f.location == facility]
     df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
                  'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
+    # index on date?
     return df
 
 
@@ -133,4 +135,11 @@ if __name__ == '__main__':
     print "------------------- Unit tests -------------------"
     path = '../db/'
     facility_data_db = i_db.get_facility_db(path)
-    print create_data_frame("GAH", facility_data_db).head()
+    df = create_data_frame("GAH", facility_data_db)
+    print df.head()
+    df['in_process'].plot()
+
+    plt.show()
+
+
+
