@@ -1,4 +1,4 @@
-#import sqlite3 # probably shouldn't be used in processing
+import pandas as pd
 import output_db as o_db
 import input_db as i_db
 import input_files as i_files
@@ -117,4 +117,20 @@ def plot_facility_trends(facility, facility_data_db):
     facility_list.sort(key=lambda x: x.date)
     for d in facility_list:
         print d.date, d.ship
-    
+
+def create_data_frame(facility, facility_data_db):
+    '''Creates data frames of facility data'''
+    facility_list = [[f.date, f.location, f.new, f.sched,
+                 f.unsched, f.ship, f.susp, f.old, f.future, f.hold, f.in_process] 
+                 for f in facility_data_db.values() if f.location == facility]
+    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
+                 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
+    return df
+
+
+
+if __name__ == '__main__':
+    print "------------------- Unit tests -------------------"
+    path = '../db/'
+    facility_data_db = i_db.get_facility_db(path)
+    print create_data_frame("GAH", facility_data_db).head()
