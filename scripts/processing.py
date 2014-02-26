@@ -82,6 +82,12 @@ def calc_facility_backlog(facility, facility_data_db):
     
     # calculate moving average processing (eliminating zeros)
     for i, date_object in enumerate(facility_list):
+        print "107", facility_list[107]
+        print "108", facility_list[108]
+        print "109", facility_list[109]
+        print "110", facility_list[110]
+        print "111", facility_list[111]
+        print "112", facility_list[112]
         if i > 10:
             cumsum = 0
             cumcount = 0
@@ -89,6 +95,7 @@ def calc_facility_backlog(facility, facility_data_db):
                 if facility_list[i-j].ship >0:
                     cumsum += facility_list[i-j].ship
                     cumcount += 1
+                    print i, j, i-j, facility_list[i-j].ship
             date_object.ship_MA10 = int(cumsum/cumcount)
         else:
             date_object.ship_MA10 = 0
@@ -135,11 +142,19 @@ if __name__ == '__main__':
     print "------------------- Unit tests -------------------"
     path = '../db/'
     facility_data_db = i_db.get_facility_db(path)
-    df = create_data_frame("GAH", facility_data_db)
-    print df.head()
-    df['in_process'].plot()
+    df = create_data_frame("ASH", facility_data_db)
+    #print df.head()
+    #df['ship'].plot()
 
-    plt.show()
+    #plt.show()
+
+    
+# debug backlogs
+
+    path = '../db/'
+    facility_data_db = i_db.get_facility_db(path)
+    ASH_today = calc_facility_backlog("ASH", facility_data_db)
+    print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
 
 
 

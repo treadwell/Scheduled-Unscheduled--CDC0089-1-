@@ -29,6 +29,11 @@ def read_file(path, filename):
         # alternative: pull things directly by line number
         lines = list(f)
 
+    assert "GAHANNA" in lines[5]
+    assert "ASHLAND" in lines[5]
+    assert "GROVEPORT" in lines[5]
+    #assert "DESOTO" in lines[5]
+    assert "RYERSON" in lines[74]
     assert "TOTAL NEW ORDERS" in lines[11]
     assert "TOTAL SCHEDULED ORDERS" in lines[36]
     assert "TOTAL UNSCHEDULED ORDERS" in lines[49]
