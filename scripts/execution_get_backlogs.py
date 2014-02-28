@@ -25,6 +25,6 @@ p.plot_facility_trends("ASH", "new")
 #  ratio of unscheduled to scheduled (is work being pulled fast enough to keep up with backlog)
 #  instantaneous backlog
 #  smoothed backlog (more responsive than MA10). Use Loess?
-#  trend in shipping, backlog, in process, new
+#  trend in shipping, backlog, in process, new versus prior year
 #  backlog at max production - what's the best way to determine this?  How much can you ramp up a facility in one day?
 
