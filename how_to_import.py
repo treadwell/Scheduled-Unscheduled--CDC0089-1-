@@ -1,9 +1,10 @@
-# option 1
+# option 1 
 
-/scripts 
- __init__.py # can be blank
- script1.py
- script2.py
+main.py
+scripts/ # this works if scripts/ is on your path, in this case in the local folder
+-- __init__.py # can be blank
+-- script1.py
+-- script2.py
 
 import scripts
 # or

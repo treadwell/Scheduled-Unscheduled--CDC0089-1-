@@ -40,13 +40,66 @@ class Daily_Prodn(object):
         #assert old > susp
         self.future = future
         self.hold = hold
-        self.in_process = sched + unsched + old + future + hold
+        # self.in_process = sched + unsched + old + future + hold
+        ## should not be calculated when the object is built
+
+    def _get_in_process(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched, self.unsched, self.old, self.future, self.hold])
+
+    in_process = property(_get_in_process)
+  
+    # in_process = property(_get_in_process, _set_in_process)
+    # foo.in_process -> will call foo._get_in_process() and return its result
+    ### getting:
+    # >>> foo.in_process
+    # 123 ## "get" a result
+    # >>> foo.in_process = 456
+    # # no result; "setting" the variable
+    # foo.in_process = 123 -> will run foo._set_in_process(123), not return anything
     
+
     def __repr__(self):
         return str(self.__dict__)
 
     # __str__ = __repr__ ## uncomment this if printing doesn't work well 
 
+
+        
+
+def create_data_frame(facility, facility_data_db):
+    '''Creates data frames of facility data'''
+    facility_list = [[f.date, f.location, f.new, f.sched,
+                 f.unsched, f.ship, f.susp, f.old, f.future, f.hold, f.in_process] 
+                 for f in facility_data_db.values() if f.location == facility]
+    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
+                 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
+    # index on date?
+    df.index = df['date']
+    df = df.sort(['date'])
+    return df        
+
+
+class Facility(object):
+    def __init__(self, name, data_dict):
+        # build the data frame here
+        self.name = name
+        self.df = create_data_frame(name, data_dict)
+        self.df['new_col'] = self.df['old'] + self.df['new']
+        
+        facility_list = [value for value in data_dict.values() if value.location == name]
+        for i, date_object in enumerate(facility_list):
+            if i > 10:
+                cumsum, cumcount = 0, 0
+                for j in xrange(0,9):
+                    if facility_list[i-j].ship >0:
+                        cumsum += facility_list[i-j].ship
+                        cumcount += 1
+                # this should be in a higher object or a separate list or smth
+                date_object.ship_MA10 = int(cumsum/cumcount)
+            else:
+                date_object.ship_MA10 = 0
+        
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
@@ -119,17 +172,6 @@ def plot_facility_trends(facility, statistic):
     plt.show()
 
 
-def create_data_frame(facility, facility_data_db):
-    '''Creates data frames of facility data'''
-    facility_list = [[f.date, f.location, f.new, f.sched,
-                 f.unsched, f.ship, f.susp, f.old, f.future, f.hold, f.in_process] 
-                 for f in facility_data_db.values() if f.location == facility]
-    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
-                 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
-    # index on date?
-    df.index = df['date']
-    df = df.sort(['date'])
-    return df
 
 
 
