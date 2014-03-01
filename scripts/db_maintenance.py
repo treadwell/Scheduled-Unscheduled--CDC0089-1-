@@ -1,4 +1,5 @@
 import sqlite3
+import input_db as i_db
 
 ### ------------------------- Database Maintenance Functions ------------------------- 
 
@@ -38,6 +39,20 @@ def count_db_records(path):
 def check_db():
     '''Check database for quality, inconsistency, etc.'''
     # only one record per facility/date
+    facility_data_db = i_db.get_facility_db('../db/')
+    #print facility_data_db.keys()
+    
+    for facility in ["GAH", "GRO", "ASH"]:
+        print facility
+        facility_list = [key for key in facility_data_db.keys() if key[0] == facility]
+        print len(facility_list)
+        print len(set(facility_list))
+        facility_list.sort(key=lambda x: x[1])
+        for key in facility_list:
+            print key
     # the counts from all tables match
-    #
-    pass
+    # reasonableness of the data
+
+if __name__ == '__main__':
+    print "------------------- Unit tests -------------------"
+    check_db()

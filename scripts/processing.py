@@ -1,11 +1,12 @@
-#import sqlite3 # probably shouldn't be used in processing
+import pandas as pd
+import matplotlib.pyplot as plt
 import output_db as o_db
 import input_db as i_db
 import input_files as i_files
 
 ### Processing Layer ###
 
-class Facility(object):
+class Daily_Prodn(object):
     def __init__(self, date, location, new, sched,
                  unsched, ship, susp, old, future, hold):
         
@@ -36,8 +37,10 @@ class Facility(object):
         self.ship = ship
         self.susp = susp
         self.old = old
+        #assert old > susp
         self.future = future
         self.hold = hold
+        self.in_process = sched + unsched + old + future + hold
     
     def __repr__(self):
         return str(self.__dict__)
@@ -48,10 +51,10 @@ def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
     # retrieve db records
-    i_db.get_facility_db('../db/')
+    facility_data_db = i_db.get_facility_db('../db/')
 
     # retrieve data from files
-    i_files.read_dir('../data/')
+    facility_data = i_files.read_dir('../data/')
 
     # determine missing records from database
     missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
@@ -59,7 +62,7 @@ def incr_db_update():
 
     # updates db with missing records
     for r in missing_records:
-        o_db.fac_to_db(r[0],r[1])
+        o_db.fac_to_db(r[0],r[1], facility_data)
         
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)
@@ -71,8 +74,8 @@ def calc_facility_backlog(facility, facility_data_db):
     facility_list = [value for value in facility_data_db.values() if value.location == facility]
     
     # calculate the orders in process
-    for date_object in facility_list:
-        date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
+    #for date_object in facility_list:
+    #    date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
   
     # order the list by date
     facility_list.sort(key=lambda x: x.date)
@@ -101,18 +104,56 @@ def calc_facility_backlog(facility, facility_data_db):
     
     return facility_list[-1]
 
-def plot_facility_trends(facility, facility_data_db):
-    '''Plots trends of processing, MA processing, orders in process and shipping over time'''
+def plot_facility_trends(facility, statistic):
+    '''Plots trends of specified statistic over time in a specified facility'''
     # Accept only "GAH", "ASH", "GRO"
+    assert facility in ["GAH", "GRO", "ASH"]
+    assert statistic in ['new', 'sched', 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process']
     # Cycle through facility_data_db, pulling values for facility into a list
-    facility_list = [value for value in facility_data_db.values() if value.location == facility]
+    path = '../db/'
+    facility_data_db = i_db.get_facility_db(path)
+    df = create_data_frame(facility, facility_data_db)
+    df[statistic].plot()
+    plt.title(statistic + " in " + facility)
+
+    plt.show()
+
+
+def create_data_frame(facility, facility_data_db):
+    '''Creates data frames of facility data'''
+    facility_list = [[f.date, f.location, f.new, f.sched,
+                 f.unsched, f.ship, f.susp, f.old, f.future, f.hold, f.in_process] 
+                 for f in facility_data_db.values() if f.location == facility]
+    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
+                 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
+    # index on date?
+    df.index = df['date']
+    df = df.sort(['date'])
+    return df
+
+
+
+if __name__ == '__main__':
+    print "------------------- Unit tests -------------------"
+    plot_facility_trends("ASH", "new")
+    # path = '../db/'
+    # facility_data_db = i_db.get_facility_db(path)
+    # df = create_data_frame("ASH", facility_data_db)
+    #df.index = df['date']
+    # print df
+    # print df.head()
+    # print df.tail()
+    # df['hold'].plot()
+
+    # plt.show()
+
     
-    # calculate the orders in process
-    for date_object in facility_list:
-        date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
-  
-    # order the list by date
-    facility_list.sort(key=lambda x: x.date)
-    for d in facility_list:
-        print d.date, d.ship
-    
+# debug backlogs
+
+    path = '../db/'
+    facility_data_db = i_db.get_facility_db(path)
+    ASH_today = calc_facility_backlog("ASH", facility_data_db)
+    print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
+
+
+

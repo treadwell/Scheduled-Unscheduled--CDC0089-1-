@@ -14,7 +14,7 @@ from re import sub
 
 ### Processing Layer ###
 
-class Facility(object):
+class Daily_Prodn(object):
     def __init__(self, date, location, new, sched,
                  unsched, ship, susp, old, future, hold):
         
@@ -133,7 +133,7 @@ def read_file(path, filename):
             else:
                 order_type_data_1.append(int(sub(r'[^\d.]', '', d)))
 
-        facility_data[(L,date)] = Facility(date, L, *order_type_data_1)
+        facility_data[(L,date)] = Daily_Prodn(date, L, *order_type_data_1)
 
     return date, facility_data
 
@@ -157,7 +157,7 @@ def get_facility_db(path):  # complete this once database output is working.
         data = c.fetchall()
         for d in data:
             d_key = (facility, str(d[0])) # turn d[0] directly into a datetime object
-            d_value = Facility(str(d[0]), facility, *d[1:]) #d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
+            d_value = Daily_Prodn(str(d[0]), facility, *d[1:]) #d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
             ### check that d is being unpacked correctly
             facility_data_1[d_key] = d_value
     #print "facility_data_1:", facility_data_1

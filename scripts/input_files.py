@@ -2,7 +2,7 @@ import re
 import os
 from datetime import datetime
 from re import sub
-from processing import *
+import processing as p
 ### Input Layer ###
 
 facility_names = {"GAH":"Gahanna", "ASH":"Ashland", "GRO":"Groveport"}
@@ -12,13 +12,28 @@ order_type_names = ['new', 'sched', 'unsched', 'ship', 'susp', 'old', 'future', 
 # L-names gives the column location of facility dollar fields
 L_names = {'GAH':[52,60], 'ASH':[90,96], 'GRO':[126,132]} 
     
-facility_data = {}
+def read_dir(path):
+    '''Retrieves correct files from directory into a list'''
+    facility_data = {}
+    files = os.listdir(path)
+    data_files = [file for file in files if 'CDC0089' in file]
+    for file in data_files:
+        file_data = read_file(path, file)
+        facility_data.update(file_data)
+    return facility_data
+    
 def read_file(path, filename):
-    '''Parses text file, creating dictionary of Facility objects'''
+    '''Parses text file, creating dictionary of Daily_Prodn objects'''
+    file_data = {}
     with open(path + filename) as f:
         # alternative: pull things directly by line number
         lines = list(f)
 
+    assert "GAHANNA" in lines[5]
+    assert "ASHLAND" in lines[5]
+    assert "GROVEPORT" in lines[5]
+    #assert "DESOTO" in lines[5]
+    assert "RYERSON" in lines[74]
     assert "TOTAL NEW ORDERS" in lines[11]
     assert "TOTAL SCHEDULED ORDERS" in lines[36]
     assert "TOTAL UNSCHEDULED ORDERS" in lines[49]
@@ -46,29 +61,20 @@ def read_file(path, filename):
             else:
                 order_type_data_1.append(int(sub(r'[^\d.]', '', d)))
 
-        facility_data[(L,date)] = Facility(date, L, *order_type_data_1)
+        file_data[(L,date)] = p.Daily_Prodn(date, L, *order_type_data_1)
 
-    return date, facility_data
+    return file_data
 
-#date, facility_data = read_file(path, filename)
-
-def read_dir(path):
-    '''Retrieves correct files from directory into a list'''
-    files = os.listdir(path)
-    data_files = [file for file in files if 'CDC0089' in file]
-    for file in data_files:
-        read_file(path, file)
 
 if __name__ == '__main__':
     path = "../test_data/"
-    read_dir(path)
+    facility_data = read_dir(path)
     assert len(facility_data) == 78
 
     filename = "CDC0089 01-01-14.txt"
     facility_data = {}
 
-    date, info = read_file(path, filename)
-    assert date == "2014-01-01"
+    info = read_file(path, filename)
     assert info[('ASH', '2014-01-01')].sched == 49
 
 
