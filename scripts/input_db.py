@@ -8,7 +8,6 @@ def get_facility_db(path):
     '''retrieve data from database into Daily_Prodn objects'''
     facility_data_db = {}
     name = "facility_data.db"
-    print "current working directory:", os.getcwd()
     conn = sqlite3.connect(path + name)
     c = conn.cursor()
     for f in ["Gahanna", "Ashland", "Groveport"]:

@@ -104,10 +104,10 @@ def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
     # retrieve db records
-    facility_data_db = i_db.get_facility_db('../db/')
+    facility_data_db = i_db.get_facility_db('./db/')
 
     # retrieve data from files
-    facility_data = i_files.read_dir('../data/')
+    facility_data = i_files.read_dir('./data/')
 
     # determine missing records from database
     missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
@@ -163,7 +163,7 @@ def plot_facility_trends(facility, statistic):
     assert facility in ["GAH", "GRO", "ASH"]
     assert statistic in ['new', 'sched', 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process']
     # Cycle through facility_data_db, pulling values for facility into a list
-    path = '../db/'
+    path = './db/'
     facility_data_db = i_db.get_facility_db(path)
     df = create_data_frame(facility, facility_data_db)
     df[statistic].plot()
@@ -177,7 +177,7 @@ def plot_facility_trends(facility, statistic):
 
 if __name__ == '__main__':
     print "------------------- Unit tests -------------------"
-    plot_facility_trends("ASH", "new")
+    #plot_facility_trends("ASH", "new")
     # path = '../db/'
     # facility_data_db = i_db.get_facility_db(path)
     # df = create_data_frame("ASH", facility_data_db)
