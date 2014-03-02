@@ -65,6 +65,97 @@ def read_file(path, filename):
 
     return file_data
 
+def read_file_2(path, filename):
+    '''Parses text file, creating dictionary of Daily_Prodn objects including
+    orders, lines, units and dollars'''
+    file_data = {}
+    with open(path + filename) as f:
+        # alternative: pull things directly by line number
+        lines = list(f)
+
+    zone_layout = {"zone1":{"line":5, "col_start":28, "col_end":61}, 
+                   "zone2":{"line":5, "col_start":64, "col_end":97},
+                   "zone3":{"line":5, "col_start":100, "col_end":133},
+                   "zone4":{"line":74, "col_start":28, "col_end":61},
+                   "zone5":{"line":74, "col_start":64, "col_end":97},
+                   "zone6":{"line":74, "col_start":100, "col_end":133},
+                   "zone7":{"line":143, "col_start":28, "col_end":69}}
+
+    offsets = {"new_orders":     {"lines":6,  "cols":0},
+               "new_lines":      {"lines":6,  "cols":7},
+               "new_units":      {"lines":6,  "cols":16},
+               "new_dollars":    {"lines":6,  "cols":26},
+               "sched_orders":   {"lines":31, "cols":0},
+               "sched_lines":    {"lines":31, "cols":7},
+               "sched_units":    {"lines":31, "cols":16},
+               "sched_dollars":  {"lines":31, "cols":26},
+               "unsched_orders": {"lines":41, "cols":0},
+               "unsched_lines":  {"lines":41, "cols":7},
+               "unsched_units":  {"lines":41, "cols":16},
+               "unsched_dollars":{"lines":41, "cols":26},
+               "ship_orders":    {"lines":55, "cols":0},
+               "ship_lines":     {"lines":55, "cols":7},
+               "ship_units":     {"lines":55, "cols":16},
+               "ship_dollars":   {"lines":55, "cols":26},
+               "susp_orders":    {"lines":58, "cols":0},
+               "susp_lines":     {"lines":58, "cols":7},
+               "susp_units":     {"lines":58, "cols":16},
+               "susp_dollars":   {"lines":58, "cols":26},
+               "old_orders":     {"lines":61, "cols":0},
+               "old_lines":      {"lines":61, "cols":7},
+               "old_units":      {"lines":61, "cols":16},
+               "old_dollars":    {"lines":61, "cols":26},
+               "fut_orders":     {"lines":62, "cols":0},
+               "fut_lines":      {"lines":62, "cols":7},
+               "fut_units":      {"lines":62, "cols":16},
+               "fut_dollars":    {"lines":62, "cols":26},
+               "hold_orders":    {"lines":63, "cols":0},
+               "hold_lines":     {"lines":63, "cols":7},
+               "hold_units":     {"lines":63, "cols":16},
+               "hold_dollars":   {"lines":63, "cols":26}}
+    
+    statistic_names = ["new_orders", "new_lines", "new_units", "new_dollars",    
+               "sched_orders", "sched_lines", "sched_units", "sched_dollars",  
+               "unsched_orders", "unsched_lines", "unsched_units", "unsched_dollars",
+               "ship_orders", "ship_lines", "ship_units", "ship_dollars",   
+               "susp_orders", "susp_lines", "susp_units", "susp_dollars",   
+               "old_orders", "old_lines", "old_units", "old_dollars",    
+               "fut_orders", "fut_lines", "fut_units", "fut_dollars",    
+               "hold_orders", "hold_lines", "hold_units", "hold_dollars"]
+
+    zone_map = {}
+
+    for zone in ["zone1", "zone2", "zone3", "zone4", "zone5", "zone6", "zone6", "zone7"]:
+        zone_area = lines[zone_layout[zone]['line']][zone_layout[zone]['col_start']:zone_layout[zone]['col_end']]
+        if "GAHANNA" in zone_area:
+            zone_map[zone]="GAH"
+        elif "ASHLAND" in zone_area:
+            zone_map[zone]="ASH"
+        elif "DESOTO" in zone_area:
+            zone_map[zone]="DES"   
+        elif "GROVEPORT" in zone_area:
+            zone_map[zone]="GRO"
+        elif "RYERSON" in zone_area:
+            zone_map[zone]="RYE"
+        elif "GRAND" in zone_area:
+            zone_map[zone]="TOT"
+        else:
+            pass
+
+    date = str([word for word in lines[1].split() if '/' in word]).strip("[]\'")
+    date = datetime.strptime(date, '%m/%d/%y')
+    date = date.strftime('%Y-%m-%d')
+
+    file_data = {}
+
+    for zone in zone_map.keys():
+        statistic_data = []
+        for s in statistic_names:
+            statistic_data.append(s)
+        file_data[(zone_map[zone],date)] = statistic_data
+
+
+    return file_data
 
 if __name__ == '__main__':
     path = "../test_data/"
@@ -75,7 +166,15 @@ if __name__ == '__main__':
     facility_data = {}
 
     info = read_file(path, filename)
+    print info
     assert info[('ASH', '2014-01-01')].sched == 49
+
+    print "------------------------"
+    filename = "CDC0089 01-01-14.txt"
+    facility_data = {}
+
+    info = read_file_2(path, filename)
+    print info
 
 
     
