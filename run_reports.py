@@ -1,8 +1,11 @@
-import processing as p
-import input_db as i_db
+import scripts.processing as p
+import scripts.input_db as i_db
+import os
 
 # Calculate facility backlogs
-path = '../db/'
+
+print os.getcwd()
+path = './db/'
 facility_data_db = i_db.get_facility_db(path)
 #print facility_data_db
 
@@ -25,6 +28,7 @@ p.plot_facility_trends("ASH", "new")
 #  ratio of unscheduled to scheduled (is work being pulled fast enough to keep up with backlog)
 #  instantaneous backlog
 #  smoothed backlog (more responsive than MA10). Use Loess?
-#  trend in shipping, backlog, in process, new
+#  trend in shipping, backlog, in process, new versus prior year
 #  backlog at max production - what's the best way to determine this?  How much can you ramp up a facility in one day?
+
 
