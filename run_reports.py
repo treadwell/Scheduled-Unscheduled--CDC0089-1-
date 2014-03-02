@@ -3,7 +3,9 @@ import scripts.input_db as i_db
 import os
 
 # Calculate facility backlogs
-path = '../db/'
+
+print os.getcwd()
+path = './db/'
 facility_data_db = i_db.get_facility_db(path)
 #print facility_data_db
 
