@@ -188,6 +188,19 @@ def create_data_frame_1(facility, facility_data_db):
     # index on date?
     df.index = df['date']
     df = df.sort(['date'])
+    df['ship_MA10_orders'] = pd.rolling_mean(df['ship_orders'],10)
+    df['ship_MA10_lines'] = pd.rolling_mean(df['ship_lines'],10)
+    df['ship_MA10_units'] = pd.rolling_mean(df['ship_units'],10)
+    df['ship_MA10_dollars'] = pd.rolling_mean(df['ship_dollars'],10)
+    df['in_process_orders'] = df['sched_orders'] + df['unsched_orders'] + df['old_orders'] + df['fut_orders'] + df['hold_orders']
+    df['in_process_lines'] = df['sched_lines'] + df['unsched_lines'] + df['old_lines'] + df['fut_lines'] + df['hold_lines']
+    df['in_process_units'] = df['sched_units'] + df['unsched_units'] + df['old_units'] + df['fut_units'] + df['hold_units']
+    df['in_process_dollars'] = df['sched_dollars'] + df['unsched_dollars'] + df['old_dollars'] + df['fut_dollars'] + df['hold_dollars']
+    df['backlog_orders'] = df['in_process_orders'].div(df['ship_MA10_orders'])
+    df['backlog_lines'] = df['in_process_lines'].div(df['ship_MA10_lines'])
+    df['backlog_units'] = df['in_process_units'].div(df['ship_MA10_units'])
+    df['backlog_dollars'] = df['in_process_dollars'].div(df['ship_MA10_dollars'])
+    print df['backlog_dollars'].tail()
     return df        
 
 def create_data_frame(facility, facility_data_db):
@@ -354,14 +367,14 @@ def plot_facility_trends_1(facility, statistic):
     '''Plots trends of specified statistic over time in a specified facility'''
     # Accept only "GAH", "ASH", "GRO"
     assert facility in ["GAH", "GRO", "ASH", "RYE", "DES", "TOT"]
-    assert statistic in ["new_orders", "new_lines", "new_units", "new_dollars",    
-               "sched_orders", "sched_lines", "sched_units", "sched_dollars",  
-               "unsched_orders", "unsched_lines", "unsched_units", "unsched_dollars",
-               "ship_orders", "ship_lines", "ship_units", "ship_dollars",   
-               "susp_orders", "susp_lines", "susp_units", "susp_dollars",   
-               "old_orders", "old_lines", "old_units", "old_dollars",    
-               "fut_orders", "fut_lines", "fut_units", "fut_dollars",    
-               "hold_orders", "hold_lines", "hold_units", "hold_dollars"]
+    # assert statistic in ["new_orders", "new_lines", "new_units", "new_dollars",    
+    #            "sched_orders", "sched_lines", "sched_units", "sched_dollars",  
+    #            "unsched_orders", "unsched_lines", "unsched_units", "unsched_dollars",
+    #            "ship_orders", "ship_lines", "ship_units", "ship_dollars",   
+    #            "susp_orders", "susp_lines", "susp_units", "susp_dollars",   
+    #            "old_orders", "old_lines", "old_units", "old_dollars",    
+    #            "fut_orders", "fut_lines", "fut_units", "fut_dollars",    
+    #            "hold_orders", "hold_lines", "hold_units", "hold_dollars"]
     # Cycle through facility_data_db, pulling values for facility into a list
     path = './db/'
     facility_data_db = i_db.get_facility_db_1(path)

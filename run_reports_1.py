@@ -22,6 +22,7 @@ print "GRO new:", GRO_today.new_dollars, "in process:", GRO_today.in_process_dol
 print "RYE new:", RYE_today.new_dollars, "in process:", RYE_today.in_process_dollars, "sched:", RYE_today.sched_dollars,  "backlog:", RYE_today.backlog_dollars
 
 
+p.plot_facility_trends_1("GAH", "backlog_dollars")
 p.plot_facility_trends_1("GAH", "new_dollars")
 p.plot_facility_trends_1("GRO", "new_dollars")
 p.plot_facility_trends_1("ASH", "new_dollars")
