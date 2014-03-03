@@ -166,6 +166,30 @@ class Daily_Prodn_1(object):
     # __str__ = __repr__ ## uncomment this if printing doesn't work well 
         
 
+def create_data_frame_1(facility, facility_data_db):
+    '''Creates data frames of facility data'''
+    facility_list = [[f.date, f.location, f.new_orders, f.new_lines, f.new_units, f.new_dollars, \
+               f.sched_orders, f.sched_lines, f.sched_units, f.sched_dollars, \
+               f.unsched_orders, f.unsched_lines, f.unsched_units, f.unsched_dollars, \
+               f.ship_orders, f.ship_lines, f.ship_units, f.ship_dollars, \
+               f.susp_orders, f.susp_lines, f.susp_units, f.susp_dollars, \
+               f.old_orders, f.old_lines, f.old_units, f.old_dollars, \
+               f.fut_orders, f.fut_lines, f.fut_units, f.fut_dollars, \
+               f.hold_orders, f.hold_lines, f.hold_units, f.hold_dollars] 
+                 for f in facility_data_db.values() if f.location == facility]
+    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new_orders', 'new_lines', 'new_units', 'new_dollars',    
+               'sched_orders', 'sched_lines', 'sched_units', 'sched_dollars',  
+               'unsched_orders', 'unsched_lines', 'unsched_units', 'unsched_dollars',
+               'ship_orders', 'ship_lines', 'ship_units', 'ship_dollars',   
+               'susp_orders', 'susp_lines', 'susp_units', 'susp_dollars',   
+               'old_orders', 'old_lines', 'old_units', 'old_dollars',    
+               'fut_orders', 'fut_lines', 'fut_units', 'fut_dollars',    
+               'hold_orders', 'hold_lines', 'hold_units', 'hold_dollars'])
+    # index on date?
+    df.index = df['date']
+    df = df.sort(['date'])
+    return df        
+
 def create_data_frame(facility, facility_data_db):
     '''Creates data frames of facility data'''
     facility_list = [[f.date, f.location, f.new, f.sched,
@@ -176,8 +200,7 @@ def create_data_frame(facility, facility_data_db):
     # index on date?
     df.index = df['date']
     df = df.sort(['date'])
-    return df        
-
+    return df 
 
 class Facility(object):
     def __init__(self, name, data_dict):
@@ -219,6 +242,26 @@ def incr_db_update():
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)
 
+def incr_db_update_1():
+    '''Compares records in a database with data available from a directory and updates
+    the missing data in the database.'''
+    # retrieve db records
+    facility_data_db = i_db.get_facility_db_1('./db/')
+
+    # retrieve data from files
+    facility_data = i_files.read_dir_1('./data/')
+
+    # determine missing records from database
+    missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
+    print missing_records
+
+    # updates db with missing records
+    for r in missing_records:
+        o_db.fac_to_db_1(r[0],r[1], facility_data)
+        
+    # checks
+        assert len(facility_data_db) + len(missing_records) == len(facility_data)
+
 def calc_facility_backlog(facility, facility_data_db):
     '''Calculates backlog in a facility over time and returns most recent backlog'''
     # Accept only "GAH", "ASH", "GRO"
@@ -256,6 +299,43 @@ def calc_facility_backlog(facility, facility_data_db):
     
     return facility_list[-1]
 
+def calc_facility_backlog_1(facility, facility_data_db):
+    '''Calculates backlog in a facility over time and returns most recent backlog'''
+    # Accept only "GAH", "ASH", "GRO"
+    # Cycle through facility_data_db, pulling values for facility into a list
+    facility_list = [value for value in facility_data_db.values() if value.location == facility]
+    
+    # calculate the orders in process
+    #for date_object in facility_list:
+    #    date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
+  
+    # order the list by date
+    facility_list.sort(key=lambda x: x.date)
+    
+    # calculate moving average processing (eliminating zeros)
+    for i, date_object in enumerate(facility_list):
+        if i > 10:
+            cumsum = 0
+            cumcount = 0
+            for j in xrange(0,9):
+                if facility_list[i-j].ship_dollars >0:
+                    cumsum += facility_list[i-j].ship_dollars
+                    cumcount += 1
+            date_object.ship_MA10_dollars = int(cumsum/cumcount)
+        else:
+            date_object.ship_MA10_dollars = 0
+
+    # calculate backlog
+    for date_object in facility_list:
+        if date_object.ship_MA10_dollars >0:
+            date_object.backlog_dollars = float(date_object.in_process_dollars)/date_object.ship_MA10_dollars
+        elif date_object.ship_dollars > 0:
+            date_object.backlog_dollars = float(date_object.in_process_dollars)/date_object.ship_dollars
+        else:
+            date_object.backlog_dollars = None
+    
+    return facility_list[-1]
+
 def plot_facility_trends(facility, statistic):
     '''Plots trends of specified statistic over time in a specified facility'''
     # Accept only "GAH", "ASH", "GRO"
@@ -265,6 +345,27 @@ def plot_facility_trends(facility, statistic):
     path = './db/'
     facility_data_db = i_db.get_facility_db(path)
     df = create_data_frame(facility, facility_data_db)
+    df[statistic].plot()
+    plt.title(statistic + " in " + facility)
+
+    plt.show()
+
+def plot_facility_trends_1(facility, statistic):
+    '''Plots trends of specified statistic over time in a specified facility'''
+    # Accept only "GAH", "ASH", "GRO"
+    assert facility in ["GAH", "GRO", "ASH", "RYE", "DES", "TOT"]
+    assert statistic in ["new_orders", "new_lines", "new_units", "new_dollars",    
+               "sched_orders", "sched_lines", "sched_units", "sched_dollars",  
+               "unsched_orders", "unsched_lines", "unsched_units", "unsched_dollars",
+               "ship_orders", "ship_lines", "ship_units", "ship_dollars",   
+               "susp_orders", "susp_lines", "susp_units", "susp_dollars",   
+               "old_orders", "old_lines", "old_units", "old_dollars",    
+               "fut_orders", "fut_lines", "fut_units", "fut_dollars",    
+               "hold_orders", "hold_lines", "hold_units", "hold_dollars"]
+    # Cycle through facility_data_db, pulling values for facility into a list
+    path = './db/'
+    facility_data_db = i_db.get_facility_db_1(path)
+    df = create_data_frame_1(facility, facility_data_db)
     df[statistic].plot()
     plt.title(statistic + " in " + facility)
 

@@ -21,6 +21,16 @@ def read_dir(path):
         file_data = read_file(path, file)
         facility_data.update(file_data)
     return facility_data
+
+def read_dir_1(path):
+    '''Retrieves correct files from directory into a list'''
+    facility_data = {}
+    files = os.listdir(path)
+    data_files = [file for file in files if 'CDC0089' in file]
+    for file in data_files:
+        file_data = read_file_1(path, file)
+        facility_data.update(file_data)
+    return facility_data
     
 def read_file(path, filename):
     '''Parses text file, creating dictionary of Daily_Prodn objects'''
@@ -65,7 +75,7 @@ def read_file(path, filename):
 
     return file_data
 
-def read_file_2(path, filename):
+def read_file_1(path, filename):
     '''Parses text file, creating dictionary of Daily_Prodn objects including
     orders, lines, units and dollars'''
     file_data = {}
@@ -142,7 +152,7 @@ def read_file_2(path, filename):
         else:
             pass
 
-    print zone_map
+    #print zone_map
 
     date = str([word for word in lines[1].split() if '/' in word]).strip("[]\'")
     date = datetime.strptime(date, '%m/%d/%y')
