@@ -188,10 +188,10 @@ def create_data_frame_1(facility, facility_data_db):
     # index on date?
     df.index = df['date']
     df = df.sort(['date'])
-    df['ship_MA10_orders'] = pd.rolling_mean(df['ship_orders'],10)
-    df['ship_MA10_lines'] = pd.rolling_mean(df['ship_lines'],10)
-    df['ship_MA10_units'] = pd.rolling_mean(df['ship_units'],10)
-    df['ship_MA10_dollars'] = pd.rolling_mean(df['ship_dollars'],10)
+    df['ship_MA10_orders'] = pd.rolling_median(df['ship_orders'],10)
+    df['ship_MA10_lines'] = pd.rolling_median(df['ship_lines'],10)
+    df['ship_MA10_units'] = pd.rolling_median(df['ship_units'],10)
+    df['ship_MA10_dollars'] = pd.rolling_median(df['ship_dollars'],10)
     df['in_process_orders'] = df['sched_orders'] + df['unsched_orders'] + df['old_orders'] + df['fut_orders'] + df['hold_orders']
     df['in_process_lines'] = df['sched_lines'] + df['unsched_lines'] + df['old_lines'] + df['fut_lines'] + df['hold_lines']
     df['in_process_units'] = df['sched_units'] + df['unsched_units'] + df['old_units'] + df['fut_units'] + df['hold_units']
@@ -200,7 +200,7 @@ def create_data_frame_1(facility, facility_data_db):
     df['backlog_lines'] = df['in_process_lines'].div(df['ship_MA10_lines'])
     df['backlog_units'] = df['in_process_units'].div(df['ship_MA10_units'])
     df['backlog_dollars'] = df['in_process_dollars'].div(df['ship_MA10_dollars'])
-    print df['backlog_dollars'].tail()
+  
     return df        
 
 def create_data_frame(facility, facility_data_db):

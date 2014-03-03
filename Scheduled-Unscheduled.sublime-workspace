@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"in_process",
+				"in_process_dollars"
+			],
+			[
 				"backlog_do",
 				"backlog_dollars"
 			],
@@ -87,7 +91,7 @@
 			"file": "run_reports_1.py",
 			"settings":
 			{
-				"buffer_size": 1728,
+				"buffer_size": 1779,
 				"line_ending": "Unix"
 			}
 		},
@@ -175,7 +179,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 16038,
+				"buffer_size": 17186,
 				"line_ending": "Unix"
 			}
 		},
@@ -294,6 +298,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"orders",
 			"\"",
 			"\",",
 			"\"",
@@ -320,6 +325,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"dollars",
+			"units",
+			"lines",
 			"'",
 			"f.",
 			",",
@@ -382,7 +390,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -391,15 +399,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1728,
+						"buffer_size": 1779,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1728,
-								1728
+								1778,
+								1778
 							]
 						],
 						"settings":
@@ -707,15 +715,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16038,
+						"buffer_size": 17186,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6561,
-								6561
+								15612,
+								16247
 							]
 						],
 						"settings":
@@ -725,10 +733,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2448.0,
+						"translation.y": 5061.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
