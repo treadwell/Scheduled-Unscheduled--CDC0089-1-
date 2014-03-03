@@ -4,7 +4,7 @@ import sqlite3
 def fac_to_db(facility, date, facility_data):
     '''updates data from all files in a directory to a database'''
     name = "facility_data.db"
-    path = "../db/"
+    path = "./db/"
     schema = "(date integer, new integer, sched integer, unsched integer, ship integer, susp integer, old integer, future integer, hold integer)"
     conn = sqlite3.connect(path + name)
     c = conn.cursor()

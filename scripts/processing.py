@@ -64,7 +64,106 @@ class Daily_Prodn(object):
 
     # __str__ = __repr__ ## uncomment this if printing doesn't work well 
 
+class Daily_Prodn_1(object):
+    def __init__(self, date, location, new_orders, new_lines, new_units, new_dollars,    
+               sched_orders, sched_lines, sched_units, sched_dollars,  
+               unsched_orders, unsched_lines, unsched_units, unsched_dollars,
+               ship_orders, ship_lines, ship_units, ship_dollars,   
+               susp_orders, susp_lines, susp_units, susp_dollars,   
+               old_orders, old_lines, old_units, old_dollars,    
+               fut_orders, fut_lines, fut_units, fut_dollars,    
+               hold_orders, hold_lines, hold_units, hold_dollars):
+        
+        # properties:
+        # location: GAH, ASH, or GRO
+        # date
+        # new: new_orders
+        # sched: scheduled orders
+        # unsched: unscheduled orders
+        # ship: ship confirms
+        # susp: suspended orders
+        # old: old in process
+        # future: future orders
+        # hold: hold or problem orders
 
+        # can do arbitrary things with the input, like any fn
+        # print date
+        # date = datetime.datetime(date)
+        
+        # this is a schema
+
+        self.date = date
+        self.location = location
+        #assert location in ('GAH', 'ASH', 'GRO', 'RYE', 'DES', "TOT")
+        self.new_orders = new_order
+        self.new_lines = new_lines
+        self.new_units = new_units
+        self.new_dollars = new_dollars
+        self.sched_orders = sched_orders
+        self.sched_lines = sched_lines
+        self.sched_units = sched_units
+        self.sched_dollars = sched_dollars
+        self.unsched_orders = unsched_orders
+        self.unsched_lines = unsched_lines
+        self.unsched_units = unsched_units
+        self.unsched_dollars = unsched_dollars
+        self.ship_orders = ship_orders
+        self.ship_lines = ship_lines
+        self.ship_units = ship_units
+        self.ship_dollars = ship_dollars
+        self.susp_orders = susp_orders
+        self.susp_lines = susp_lines
+        self.susp_units = susp_units
+        self.susp_dollars = susp_dollars
+        self.old_orders = old_orders
+        self.old_lines = old_lines
+        self.old_units = old_units
+        self.old_dollars = old_dollars
+        self.fut_orders = fut_orders
+        self.fut_lines = fut_lines
+        self.fut_units = fut_units
+        self.fut_dollars = fut_dollars
+        self.hold_orders = hold_orders
+        self.hold_lines = hold_lines
+        self.hold_units = hold_units
+        self.hold_dollars = hold_dollars
+
+    def _get_in_process_orders(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_orders, self.unsched_orders, self.old_orders, self.future_orders, self.hold_orders])
+    in_process_orders = property(_get_in_process_orders)
+
+    def _get_in_process_lines(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_lines, self.unsched_lines, self.old_lines, self.future_lines, self.hold_lines])
+    in_process_lines = property(_get_in_process_lines)
+
+    def _get_in_process_units(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_units, self.unsched_units, self.old_units, self.future_units, self.hold_units])
+    in_process_units = property(_get_in_process_units)
+
+    def _get_in_process_dollars(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_dollars, self.unsched_dollars, self.old_dollars, self.future_dollars, self.hold_dollars])
+    in_process_dollars = property(_get_in_process_dollars)
+
+
+  
+    # in_process = property(_get_in_process, _set_in_process)
+    # foo.in_process -> will call foo._get_in_process() and return its result
+    ### getting:
+    # >>> foo.in_process
+    # 123 ## "get" a result
+    # >>> foo.in_process = 456
+    # # no result; "setting" the variable
+    # foo.in_process = 123 -> will run foo._set_in_process(123), not return anything
+    
+
+    def __repr__(self):
+        return str(self.__dict__)
+
+    # __str__ = __repr__ ## uncomment this if printing doesn't work well 
         
 
 def create_data_frame(facility, facility_data_db):

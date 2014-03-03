@@ -1,7 +1,7 @@
 import scripts.processing as p
 import scripts.db_maintenance as db_m
 
-''' This script compares the data in files versus the data in the db and updates
+''' This script compares the data in files against the data in the db and updates
     the db with new or missing data'''
 
 path_to_db = "./db/"
