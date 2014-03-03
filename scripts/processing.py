@@ -95,7 +95,7 @@ class Daily_Prodn_1(object):
         self.date = date
         self.location = location
         #assert location in ('GAH', 'ASH', 'GRO', 'RYE', 'DES', "TOT")
-        self.new_orders = new_order
+        self.new_orders = new_orders
         self.new_lines = new_lines
         self.new_units = new_units
         self.new_dollars = new_dollars
@@ -130,22 +130,22 @@ class Daily_Prodn_1(object):
 
     def _get_in_process_orders(self):
         # class properties/methods that start with underscore are private
-        return sum([self.sched_orders, self.unsched_orders, self.old_orders, self.future_orders, self.hold_orders])
+        return sum([self.sched_orders, self.unsched_orders, self.old_orders, self.fut_orders, self.hold_orders])
     in_process_orders = property(_get_in_process_orders)
 
     def _get_in_process_lines(self):
         # class properties/methods that start with underscore are private
-        return sum([self.sched_lines, self.unsched_lines, self.old_lines, self.future_lines, self.hold_lines])
+        return sum([self.sched_lines, self.unsched_lines, self.old_lines, self.fut_lines, self.hold_lines])
     in_process_lines = property(_get_in_process_lines)
 
     def _get_in_process_units(self):
         # class properties/methods that start with underscore are private
-        return sum([self.sched_units, self.unsched_units, self.old_units, self.future_units, self.hold_units])
+        return sum([self.sched_units, self.unsched_units, self.old_units, self.fut_units, self.hold_units])
     in_process_units = property(_get_in_process_units)
 
     def _get_in_process_dollars(self):
         # class properties/methods that start with underscore are private
-        return sum([self.sched_dollars, self.unsched_dollars, self.old_dollars, self.future_dollars, self.hold_dollars])
+        return sum([self.sched_dollars, self.unsched_dollars, self.old_dollars, self.fut_dollars, self.hold_dollars])
     in_process_dollars = property(_get_in_process_dollars)
 
 
