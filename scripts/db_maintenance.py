@@ -3,24 +3,8 @@ import input_db as i_db
 
 ### ------------------------- Database Maintenance Functions ------------------------- 
 
-def wipe_tables():
-    '''Wipes all tables in database. Used to clear duplicate records created during debugging.'''
-    name = "facility_data.db"
-    path = "../db/"
-    schema = "(date integer, new integer, sched integer, unsched integer, ship integer, susp integer, old integer, future integer, hold integer)"
-    conn = sqlite3.connect(path + name)
-    c = conn.cursor()
-	    
-    for table in ["Gahanna", "Ashland", "Groveport"]:
-        print "deleting:", table
-        c.execute('''DROP table ''' + table)
-        c.execute('''CREATE TABLE IF NOT EXISTS ''' + table + schema)
-        
-    conn.commit()
-    conn.close()
-    return
 
-def wipe_tables_1():
+def wipe_tables():
     '''Wipes all tables in database. Used to clear duplicate records created during debugging.'''
     name = "facility_data_1.db"
     path = "../db/"
@@ -44,7 +28,7 @@ def wipe_tables_1():
     conn.close()
     return
 
-def create_database_1():
+def create_database():
     name = "facility_data_1.db"
     path = "../db/"
     schema = "(date integer, new_orders integer, new_lines integer, new_units integer, new_dollars integer, \
@@ -66,23 +50,8 @@ def create_database_1():
     conn.close()
     return
 
+
 def count_db_records(path):
-    '''Count records in the database to provide visual confirmation of update, etc.'''
-    name = "facility_data.db"
-    conn = sqlite3.connect(path + name)
-    c = conn.cursor()
-    record_count = 0
-    for table in ["Gahanna", "Ashland", "Groveport"]:
-        c.execute('''SELECT COUNT(*) FROM ''' + table)
-        records = int(c.fetchall()[0][0])  # extracts the count from returned tuple inside list
-        print table, "records: ", records
-        record_count += records
-    conn.commit()
-    conn.close()
-
-    return record_count
-
-def count_db_records_1(path):
     '''Count records in the database to provide visual confirmation of update, etc.'''
     name = "facility_data_1.db"
     conn = sqlite3.connect(path + name)
@@ -119,5 +88,4 @@ if __name__ == '__main__':
     print "------------------- Unit tests -------------------"
     check_db()
 
-    create_database_1()
 

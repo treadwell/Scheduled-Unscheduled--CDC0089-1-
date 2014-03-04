@@ -7,64 +7,6 @@ import input_files as i_files
 ### Processing Layer ###
 
 class Daily_Prodn(object):
-    def __init__(self, date, location, new, sched,
-                 unsched, ship, susp, old, future, hold):
-        
-        # properties:
-        # location: GAH, ASH, or GRO
-        # date
-        # new: new_orders
-        # sched: scheduled orders
-        # unsched: unscheduled orders
-        # ship: ship confirms
-        # susp: suspended orders
-        # old: old in process
-        # future: future orders
-        # hold: hold or problem orders
-
-        # can do arbitrary things with the input, like any fn
-        # print date
-        # date = datetime.datetime(date)
-        
-        # this is a schema
-
-        self.date = date
-        self.location = location
-        assert location in ('GAH', 'ASH', 'GRO')
-        self.new = new
-        self.sched = sched
-        self.unsched = unsched
-        self.ship = ship
-        self.susp = susp
-        self.old = old
-        #assert old > susp
-        self.future = future
-        self.hold = hold
-        # self.in_process = sched + unsched + old + future + hold
-        ## should not be calculated when the object is built
-
-    def _get_in_process(self):
-        # class properties/methods that start with underscore are private
-        return sum([self.sched, self.unsched, self.old, self.future, self.hold])
-
-    in_process = property(_get_in_process)
-  
-    # in_process = property(_get_in_process, _set_in_process)
-    # foo.in_process -> will call foo._get_in_process() and return its result
-    ### getting:
-    # >>> foo.in_process
-    # 123 ## "get" a result
-    # >>> foo.in_process = 456
-    # # no result; "setting" the variable
-    # foo.in_process = 123 -> will run foo._set_in_process(123), not return anything
-    
-
-    def __repr__(self):
-        return str(self.__dict__)
-
-    # __str__ = __repr__ ## uncomment this if printing doesn't work well 
-
-class Daily_Prodn_1(object):
     def __init__(self, date, location, new_orders, new_lines, new_units, new_dollars,    
                sched_orders, sched_lines, sched_units, sched_dollars,  
                unsched_orders, unsched_lines, unsched_units, unsched_dollars,
@@ -203,17 +145,6 @@ def create_data_frame_1(facility, facility_data_db):
   
     return df        
 
-def create_data_frame(facility, facility_data_db):
-    '''Creates data frames of facility data'''
-    facility_list = [[f.date, f.location, f.new, f.sched,
-                 f.unsched, f.ship, f.susp, f.old, f.future, f.hold, f.in_process] 
-                 for f in facility_data_db.values() if f.location == facility]
-    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
-                 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
-    # index on date?
-    df.index = df['date']
-    df = df.sort(['date'])
-    return df 
 
 class Facility(object):
     def __init__(self, name, data_dict):
@@ -238,7 +169,7 @@ class Facility(object):
         if self.df['backlog_units'].iget(-1) >3: 
             print self.name, "unit backlog > 3 days (", self.df['backlog_units'].iget(-1), ")"
         
-        
+
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
@@ -255,26 +186,6 @@ def incr_db_update():
     # updates db with missing records
     for r in missing_records:
         o_db.fac_to_db(r[0],r[1], facility_data)
-        
-    # checks
-        assert len(facility_data_db) + len(missing_records) == len(facility_data)
-
-def incr_db_update_1():
-    '''Compares records in a database with data available from a directory and updates
-    the missing data in the database.'''
-    # retrieve db records
-    facility_data_db = i_db.get_facility_db_1('./db/')
-
-    # retrieve data from files
-    facility_data = i_files.read_dir_1('./data/')
-
-    # determine missing records from database
-    missing_records = list(set(facility_data.keys())-set(facility_data_db.keys()))
-    print missing_records
-
-    # updates db with missing records
-    for r in missing_records:
-        o_db.fac_to_db_1(r[0],r[1], facility_data)
         
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)
@@ -298,7 +209,7 @@ if __name__ == '__main__':
 # debug backlogs
 
     path = '../db/'
-    facility_data_db = i_db.get_facility_db_1(path)
+    facility_data_db = i_db.get_facility_db(path)
 
 
 
