@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"in_process",
+				"in_process_dollars"
+			],
+			[
+				"backlog_do",
+				"backlog_dollars"
+			],
+			[
+				"ship_",
+				"ship_dollars"
+			],
+			[
+				"pro",
+				"props"
+			],
+			[
+				"sched",
+				"sched_dollars"
+			],
+			[
+				"statistic",
+				"statistic_names"
+			],
+			[
+				"statisti",
+				"statistic_data"
+			],
+			[
+				"Grov",
+				"GROVEPORT"
+			],
+			[
+				"A",
+				"ASHLAND"
+			],
+			[
+				"ga",
+				"GAHANNA"
+			],
+			[
 				"GAH",
 				"GAH_today"
 			],
@@ -43,8 +83,40 @@
 			"file": "run_reports.py",
 			"settings":
 			{
-				"buffer_size": 1307,
+				"buffer_size": 1325,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "run_reports_1.py",
+			"settings":
+			{
+				"buffer_size": 2335,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/Ben questions.txt",
+			"settings":
+			{
+				"buffer_size": 1363,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/input_files.py",
+			"settings":
+			{
+				"buffer_size": 9959,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test_data/CDC0089 01-02-14.txt",
+			"settings":
+			{
+				"buffer_size": 11904,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -52,6 +124,46 @@
 			"settings":
 			{
 				"buffer_size": 369,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "run_daily_update_1.py",
+			"settings":
+			{
+				"buffer_size": 375,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/execution_wipe_tables.py",
+			"settings":
+			{
+				"buffer_size": 50,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/execution_wipe_tables_1.py",
+			"settings":
+			{
+				"buffer_size": 52,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/db_maintenance.py",
+			"settings":
+			{
+				"buffer_size": 5146,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/output_db.py",
+			"settings":
+			{
+				"buffer_size": 4003,
 				"line_ending": "Unix"
 			}
 		},
@@ -67,7 +179,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 6897,
+				"buffer_size": 11757,
 				"line_ending": "Unix"
 			}
 		},
@@ -75,7 +187,7 @@
 			"file": "scripts/input_db.py",
 			"settings":
 			{
-				"buffer_size": 1016,
+				"buffer_size": 1959,
 				"line_ending": "Unix"
 			}
 		}
@@ -111,6 +223,8 @@
 	},
 	"file_history":
 	[
+		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/data/CDC0089 01-01-14.txt",
+		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/data/2013-06-15 CDC0089.txt",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/test_db/run_daily_update.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/execution_incr_update.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/Ben questions.txt",
@@ -169,7 +283,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -184,6 +298,15 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"orders",
+			"\"",
+			"\",",
+			"\"",
+			"3,387",
+			"\"",
+			":",
+			"\"lines\":6",
+			"new",
 			"Facility",
 			"def get_facility",
 			"  ",
@@ -197,11 +320,33 @@
 			"notebook_di"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"dollars",
+			"units",
+			"lines",
+			"'",
+			"f.",
+			",",
+			"",
+			",",
+			"\"lines\":63",
+			"\"lines\":62",
+			"\"lines\":61",
+			"\"lines\":58",
+			"\"lines\":55",
+			"\"lines\":41",
+			"\"lines\":31",
+			"hold",
+			"fut",
+			"old",
+			"susp",
+			"ship",
+			"unsched",
+			"sched",
 			"Daily_Prodn",
 			", ",
 			"   ",
@@ -212,12 +357,12 @@
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
-		"wrap": true
+		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -226,15 +371,188 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1307,
+						"buffer_size": 1325,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								72,
-								72
+								1324,
+								1324
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "run_reports_1.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2335,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1535,
+								1535
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 38.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "scripts/Ben questions.txt",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "scripts/input_files.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8627,
+								8536
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2617.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "test_data/CDC0089 01-02-14.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10503,
+								10503
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1009.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "run_daily_update.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 369,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								369,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "run_daily_update_1.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								375,
+								375
 							]
 						],
 						"settings":
@@ -249,20 +567,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "run_daily_update.py",
+					"buffer": 7,
+					"file": "scripts/execution_wipe_tables.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 369,
+						"buffer_size": 50,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								211,
-								211
+								50,
+								0
 							]
 						],
 						"settings":
@@ -273,11 +591,99 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 8,
+					"file": "scripts/execution_wipe_tables_1.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 52,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								52,
+								52
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "scripts/db_maintenance.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5125,
+								5125
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "scripts/output_db.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4003,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3554,
+								2953
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 465.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
 					"file": "how_to_import.py",
 					"semi_transient": false,
 					"settings":
@@ -301,24 +707,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 12,
 					"file": "scripts/processing.py",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6897,
+						"buffer_size": 11757,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								11270,
+								11270
 							]
 						],
 						"settings":
@@ -327,28 +733,28 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 432.0,
+						"translation.x": 0.0,
+						"translation.y": 3373.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 13,
 					"file": "scripts/input_db.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1016,
+						"buffer_size": 1959,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								215,
-								215
+								1636,
+								1636
 							]
 						],
 						"settings":
@@ -361,7 +767,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -400,7 +806,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 227.0
+		"height": 399.0
 	},
 	"output.find_results":
 	{
@@ -447,7 +853,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 199.0,
+	"side_bar_width": 246.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -1,3 +1,3 @@
-from db_maintenance import *
+import db_maintenance as db_m
 
-wipe_tables()
+db_m.wipe_tables()

@@ -7,21 +7,27 @@ import os
 def get_facility_db(path):
     '''retrieve data from database into Daily_Prodn objects'''
     facility_data_db = {}
-    name = "facility_data.db"
+    name = "facility_data_1.db"
     conn = sqlite3.connect(path + name)
     c = conn.cursor()
-    for f in ["Gahanna", "Ashland", "Groveport"]:
+    for f in ["Gahanna", "Ashland", "Groveport", "DeSoto", "Ryerson", "Total"]:
         if f == "Gahanna":
             facility = "GAH"
         elif f == "Ashland":
             facility = "ASH"
-        else:
+        elif f == "Groveport":
             facility = "GRO"
+        elif f == "DeSoto":
+            facility = "DES"
+        elif f == "Ryerson":
+            facility = "RYE" 
+        else:
+            facility = "TOT"
         c.execute("Select * from " + f)
         data = c.fetchall()
         for d in data:
             d_key = (facility, str(d[0]))
-            d_value = p.Daily_Prodn(datetime.strptime(d[0], '%Y-%m-%d').date(), facility, d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8])
+            d_value = p.Daily_Prodn(datetime.strptime(d[0], '%Y-%m-%d').date(), facility, *d[1:])
             facility_data_db[d_key] = d_value
     return facility_data_db
 

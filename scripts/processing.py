@@ -7,8 +7,14 @@ import input_files as i_files
 ### Processing Layer ###
 
 class Daily_Prodn(object):
-    def __init__(self, date, location, new, sched,
-                 unsched, ship, susp, old, future, hold):
+    def __init__(self, date, location, new_orders, new_lines, new_units, new_dollars,    
+               sched_orders, sched_lines, sched_units, sched_dollars,  
+               unsched_orders, unsched_lines, unsched_units, unsched_dollars,
+               ship_orders, ship_lines, ship_units, ship_dollars,   
+               susp_orders, susp_lines, susp_units, susp_dollars,   
+               old_orders, old_lines, old_units, old_dollars,    
+               fut_orders, fut_lines, fut_units, fut_dollars,    
+               hold_orders, hold_lines, hold_units, hold_dollars):
         
         # properties:
         # location: GAH, ASH, or GRO
@@ -30,24 +36,61 @@ class Daily_Prodn(object):
 
         self.date = date
         self.location = location
-        assert location in ('GAH', 'ASH', 'GRO')
-        self.new = new
-        self.sched = sched
-        self.unsched = unsched
-        self.ship = ship
-        self.susp = susp
-        self.old = old
-        #assert old > susp
-        self.future = future
-        self.hold = hold
-        # self.in_process = sched + unsched + old + future + hold
-        ## should not be calculated when the object is built
+        #assert location in ('GAH', 'ASH', 'GRO', 'RYE', 'DES', "TOT")
+        self.new_orders = new_orders
+        self.new_lines = new_lines
+        self.new_units = new_units
+        self.new_dollars = new_dollars
+        self.sched_orders = sched_orders
+        self.sched_lines = sched_lines
+        self.sched_units = sched_units
+        self.sched_dollars = sched_dollars
+        self.unsched_orders = unsched_orders
+        self.unsched_lines = unsched_lines
+        self.unsched_units = unsched_units
+        self.unsched_dollars = unsched_dollars
+        self.ship_orders = ship_orders
+        self.ship_lines = ship_lines
+        self.ship_units = ship_units
+        self.ship_dollars = ship_dollars
+        self.susp_orders = susp_orders
+        self.susp_lines = susp_lines
+        self.susp_units = susp_units
+        self.susp_dollars = susp_dollars
+        self.old_orders = old_orders
+        self.old_lines = old_lines
+        self.old_units = old_units
+        self.old_dollars = old_dollars
+        self.fut_orders = fut_orders
+        self.fut_lines = fut_lines
+        self.fut_units = fut_units
+        self.fut_dollars = fut_dollars
+        self.hold_orders = hold_orders
+        self.hold_lines = hold_lines
+        self.hold_units = hold_units
+        self.hold_dollars = hold_dollars
 
-    def _get_in_process(self):
+    def _get_in_process_orders(self):
         # class properties/methods that start with underscore are private
-        return sum([self.sched, self.unsched, self.old, self.future, self.hold])
+        return sum([self.sched_orders, self.unsched_orders, self.old_orders, self.fut_orders, self.hold_orders])
+    in_process_orders = property(_get_in_process_orders)
 
-    in_process = property(_get_in_process)
+    def _get_in_process_lines(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_lines, self.unsched_lines, self.old_lines, self.fut_lines, self.hold_lines])
+    in_process_lines = property(_get_in_process_lines)
+
+    def _get_in_process_units(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_units, self.unsched_units, self.old_units, self.fut_units, self.hold_units])
+    in_process_units = property(_get_in_process_units)
+
+    def _get_in_process_dollars(self):
+        # class properties/methods that start with underscore are private
+        return sum([self.sched_dollars, self.unsched_dollars, self.old_dollars, self.fut_dollars, self.hold_dollars])
+    in_process_dollars = property(_get_in_process_dollars)
+
+
   
     # in_process = property(_get_in_process, _set_in_process)
     # foo.in_process -> will call foo._get_in_process() and return its result
@@ -63,20 +106,43 @@ class Daily_Prodn(object):
         return str(self.__dict__)
 
     # __str__ = __repr__ ## uncomment this if printing doesn't work well 
-
-
         
 
-def create_data_frame(facility, facility_data_db):
+def create_data_frame_1(facility, facility_data_db):
     '''Creates data frames of facility data'''
-    facility_list = [[f.date, f.location, f.new, f.sched,
-                 f.unsched, f.ship, f.susp, f.old, f.future, f.hold, f.in_process] 
+    facility_list = [[f.date, f.location, f.new_orders, f.new_lines, f.new_units, f.new_dollars, \
+               f.sched_orders, f.sched_lines, f.sched_units, f.sched_dollars, \
+               f.unsched_orders, f.unsched_lines, f.unsched_units, f.unsched_dollars, \
+               f.ship_orders, f.ship_lines, f.ship_units, f.ship_dollars, \
+               f.susp_orders, f.susp_lines, f.susp_units, f.susp_dollars, \
+               f.old_orders, f.old_lines, f.old_units, f.old_dollars, \
+               f.fut_orders, f.fut_lines, f.fut_units, f.fut_dollars, \
+               f.hold_orders, f.hold_lines, f.hold_units, f.hold_dollars] 
                  for f in facility_data_db.values() if f.location == facility]
-    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new', 'sched',
-                 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process'])
+    df = pd.DataFrame(facility_list, columns=['date', 'location', 'new_orders', 'new_lines', 'new_units', 'new_dollars',    
+               'sched_orders', 'sched_lines', 'sched_units', 'sched_dollars',  
+               'unsched_orders', 'unsched_lines', 'unsched_units', 'unsched_dollars',
+               'ship_orders', 'ship_lines', 'ship_units', 'ship_dollars',   
+               'susp_orders', 'susp_lines', 'susp_units', 'susp_dollars',   
+               'old_orders', 'old_lines', 'old_units', 'old_dollars',    
+               'fut_orders', 'fut_lines', 'fut_units', 'fut_dollars',    
+               'hold_orders', 'hold_lines', 'hold_units', 'hold_dollars'])
     # index on date?
     df.index = df['date']
     df = df.sort(['date'])
+    df['ship_MA10_orders'] = pd.rolling_median(df['ship_orders'],10)
+    df['ship_MA10_lines'] = pd.rolling_median(df['ship_lines'],10)
+    df['ship_MA10_units'] = pd.rolling_median(df['ship_units'],10)
+    df['ship_MA10_dollars'] = pd.rolling_median(df['ship_dollars'],10)
+    df['in_process_orders'] = df['sched_orders'] + df['unsched_orders'] + df['old_orders'] + df['fut_orders'] + df['hold_orders']
+    df['in_process_lines'] = df['sched_lines'] + df['unsched_lines'] + df['old_lines'] + df['fut_lines'] + df['hold_lines']
+    df['in_process_units'] = df['sched_units'] + df['unsched_units'] + df['old_units'] + df['fut_units'] + df['hold_units']
+    df['in_process_dollars'] = df['sched_dollars'] + df['unsched_dollars'] + df['old_dollars'] + df['fut_dollars'] + df['hold_dollars']
+    df['backlog_orders'] = df['in_process_orders'].div(df['ship_MA10_orders'])
+    df['backlog_lines'] = df['in_process_lines'].div(df['ship_MA10_lines'])
+    df['backlog_units'] = df['in_process_units'].div(df['ship_MA10_units'])
+    df['backlog_dollars'] = df['in_process_dollars'].div(df['ship_MA10_dollars'])
+  
     return df        
 
 
@@ -84,22 +150,26 @@ class Facility(object):
     def __init__(self, name, data_dict):
         # build the data frame here
         self.name = name
-        self.df = create_data_frame(name, data_dict)
-        self.df['new_col'] = self.df['old'] + self.df['new']
+        self.df = create_data_frame_1(name, data_dict)
+        #self.df['new_col'] = self.df['old'] + self.df['new']
+    
+    def plot_trend(self, statistic):
+        '''Plots trends of specified statistic over time in a specified facility'''
+        self.df[statistic].plot()
+        plt.title(statistic + " in " + self.name)
+        plt.show()
+
+    def warnings(self):
+        '''identifies potential warning conditions'''
+        # Backlogs
+        if self.df['backlog_dollars'].iget(-1) > 3:
+            print self.name, "dollar backlog > 3 days (", self.df['backlog_dollars'].iget(-1), ")"
+        if self.df['backlog_lines'].iget(-1) > 3:
+            print self.name, "line backlog > 3 days (", self.df['backlog_lines'].iget(-1), ")"
+        if self.df['backlog_units'].iget(-1) >3: 
+            print self.name, "unit backlog > 3 days (", self.df['backlog_units'].iget(-1), ")"
         
-        facility_list = [value for value in data_dict.values() if value.location == name]
-        for i, date_object in enumerate(facility_list):
-            if i > 10:
-                cumsum, cumcount = 0, 0
-                for j in xrange(0,9):
-                    if facility_list[i-j].ship >0:
-                        cumsum += facility_list[i-j].ship
-                        cumcount += 1
-                # this should be in a higher object or a separate list or smth
-                date_object.ship_MA10 = int(cumsum/cumcount)
-            else:
-                date_object.ship_MA10 = 0
-        
+
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
@@ -119,60 +189,6 @@ def incr_db_update():
         
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)
-
-def calc_facility_backlog(facility, facility_data_db):
-    '''Calculates backlog in a facility over time and returns most recent backlog'''
-    # Accept only "GAH", "ASH", "GRO"
-    # Cycle through facility_data_db, pulling values for facility into a list
-    facility_list = [value for value in facility_data_db.values() if value.location == facility]
-    
-    # calculate the orders in process
-    #for date_object in facility_list:
-    #    date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
-  
-    # order the list by date
-    facility_list.sort(key=lambda x: x.date)
-    
-    # calculate moving average processing (eliminating zeros)
-    for i, date_object in enumerate(facility_list):
-        if i > 10:
-            cumsum = 0
-            cumcount = 0
-            for j in xrange(0,9):
-                if facility_list[i-j].ship >0:
-                    cumsum += facility_list[i-j].ship
-                    cumcount += 1
-            date_object.ship_MA10 = int(cumsum/cumcount)
-        else:
-            date_object.ship_MA10 = 0
-
-    # calculate backlog
-    for date_object in facility_list:
-        if date_object.ship_MA10 >0:
-            date_object.backlog = float(date_object.in_process)/date_object.ship_MA10
-        elif date_object.ship > 0:
-            date_object.backlog = float(date_object.in_process)/date_object.ship
-        else:
-            date_object.backlog = None
-    
-    return facility_list[-1]
-
-def plot_facility_trends(facility, statistic):
-    '''Plots trends of specified statistic over time in a specified facility'''
-    # Accept only "GAH", "ASH", "GRO"
-    assert facility in ["GAH", "GRO", "ASH"]
-    assert statistic in ['new', 'sched', 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process']
-    # Cycle through facility_data_db, pulling values for facility into a list
-    path = './db/'
-    facility_data_db = i_db.get_facility_db(path)
-    df = create_data_frame(facility, facility_data_db)
-    df[statistic].plot()
-    plt.title(statistic + " in " + facility)
-
-    plt.show()
-
-
-
 
 
 if __name__ == '__main__':
@@ -194,8 +210,6 @@ if __name__ == '__main__':
 
     path = '../db/'
     facility_data_db = i_db.get_facility_db(path)
-    ASH_today = calc_facility_backlog("ASH", facility_data_db)
-    print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
 
 
 

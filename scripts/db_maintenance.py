@@ -3,15 +3,23 @@ import input_db as i_db
 
 ### ------------------------- Database Maintenance Functions ------------------------- 
 
+
 def wipe_tables():
     '''Wipes all tables in database. Used to clear duplicate records created during debugging.'''
-    name = "facility_data.db"
+    name = "facility_data_1.db"
     path = "../db/"
-    schema = "(date integer, new integer, sched integer, unsched integer, ship integer, susp integer, old integer, future integer, hold integer)"
+    schema = "(date integer, new_orders integer, new_lines integer, new_units integer, new_dollars integer, \
+        sched_orders integer, sched_lines integer, sched_units integer, sched_dollars integer, \
+        unsched_orders integer, unsched_lines integer, unsched_units integer, unsched_dollars integer, \
+        ship_orders integer, ship_lines integer, ship_units integer, ship_dollars integer,  \
+        susp_orders integer, susp_lines integer, susp_units integer, susp_dollars integer, \
+        old_orders integer, old_lines integer, old_units integer, old_dollars integer,    \
+        fut_orders integer, fut_lines integer, fut_units integer, fut_dollars integer,   \
+        hold_orders integer, hold_lines integer, hold_units integer, hold_dollars integer)"
     conn = sqlite3.connect(path + name)
     c = conn.cursor()
-	    
-    for table in ["Gahanna", "Ashland", "Groveport"]:
+        
+    for table in ["Gahanna", "Ashland", "Groveport", "DeSoto", "Ryerson", "Total"]:
         print "deleting:", table
         c.execute('''DROP table ''' + table)
         c.execute('''CREATE TABLE IF NOT EXISTS ''' + table + schema)
@@ -20,13 +28,36 @@ def wipe_tables():
     conn.close()
     return
 
+def create_database():
+    name = "facility_data_1.db"
+    path = "../db/"
+    schema = "(date integer, new_orders integer, new_lines integer, new_units integer, new_dollars integer, \
+        sched_orders integer, sched_lines integer, sched_units integer, sched_dollars integer, \
+        unsched_orders integer, unsched_lines integer, unsched_units integer, unsched_dollars integer, \
+        ship_orders integer, ship_lines integer, ship_units integer, ship_dollars integer,  \
+        susp_orders integer, susp_lines integer, susp_units integer, susp_dollars integer, \
+        old_orders integer, old_lines integer, old_units integer, old_dollars integer,    \
+        fut_orders integer, fut_lines integer, fut_units integer, fut_dollars integer,   \
+        hold_orders integer, hold_lines integer, hold_units integer, hold_dollars integer)"
+    conn = sqlite3.connect(path + name)
+    c = conn.cursor()
+        
+    for table in ["Gahanna", "Ashland", "Groveport", "DeSoto", "Ryerson", "Total"]:
+        print "creating:", table
+        c.execute('''CREATE TABLE IF NOT EXISTS ''' + table + schema)
+        
+    conn.commit()
+    conn.close()
+    return
+
+
 def count_db_records(path):
     '''Count records in the database to provide visual confirmation of update, etc.'''
-    name = "facility_data.db"
+    name = "facility_data_1.db"
     conn = sqlite3.connect(path + name)
     c = conn.cursor()
     record_count = 0
-    for table in ["Gahanna", "Ashland", "Groveport"]:
+    for table in ["Gahanna", "Ashland", "Groveport", "DeSoto", "Ryerson", "Total"]:
         c.execute('''SELECT COUNT(*) FROM ''' + table)
         records = int(c.fetchall()[0][0])  # extracts the count from returned tuple inside list
         print table, "records: ", records
@@ -56,3 +87,5 @@ def check_db():
 if __name__ == '__main__':
     print "------------------- Unit tests -------------------"
     check_db()
+
+
