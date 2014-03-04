@@ -27,22 +27,26 @@ Ryerson = p.Facility("RYE", facility_data_db)
 TotalDomestic = p.Facility("TOT", facility_data_db)
 
 print "Gahanna backlogs:"
-print Gahanna.df['backlog_dollars'].tail(1)  # syntax for last item in a dataframe?
-print Gahanna.df['backlog_lines'].tail(1) 
+print "Dollar backlog: ", Gahanna.df['backlog_dollars'].iget(-1)
+print "Line backlog: ", Gahanna.df['backlog_lines'].iget(-1) 
+print "Unit backlog: ", Gahanna.df['backlog_units'].iget(-1) 
 print "----------"
 print "Ashland backlogs:"
-print Ashland.df['backlog_dollars'].tail(1)
-print Ashland.df['backlog_lines'].tail(1) 
+print "Dollar backlog: ", Ashland.df['backlog_dollars'].iget(-1)
+print "Line backlog: ", Ashland.df['backlog_lines'].iget(-1) 
+print "Unit backlog: ", Ashland.df['backlog_units'].iget(-1) 
 print "----------"
 print "Groveport backlogs:"
-print Groveport.df['backlog_dollars'].tail(1)
-print Groveport.df['backlog_lines'].tail(1) 
+print "Dollar backlog: ", Groveport.df['backlog_dollars'].iget(-1)
+print "Line backlog: ", Groveport.df['backlog_lines'].iget(-1) 
+print "Unit backlog: ", Groveport.df['backlog_units'].iget(-1) 
 
 Gahanna.plot_trend("backlog_dollars")
 Gahanna.plot_trend("backlog_lines")
 
 Ashland.plot_trend("backlog_dollars")
 Ashland.plot_trend("backlog_lines")
+Ashland.plot_trend("backlog_units")
 
 Groveport.plot_trend("backlog_dollars")
 Groveport.plot_trend("backlog_lines")

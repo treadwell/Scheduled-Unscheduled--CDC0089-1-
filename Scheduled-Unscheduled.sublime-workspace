@@ -91,7 +91,15 @@
 			"file": "run_reports_1.py",
 			"settings":
 			{
-				"buffer_size": 1779,
+				"buffer_size": 2335,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/Ben questions.txt",
+			"settings":
+			{
+				"buffer_size": 1363,
 				"line_ending": "Unix"
 			}
 		},
@@ -144,14 +152,6 @@
 			}
 		},
 		{
-			"file": "scripts/execution_db_utilities.py",
-			"settings":
-			{
-				"buffer_size": 83,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "scripts/db_maintenance.py",
 			"settings":
 			{
@@ -179,7 +179,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 17186,
+				"buffer_size": 11757,
 				"line_ending": "Unix"
 			}
 		},
@@ -390,7 +390,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -399,15 +399,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1779,
+						"buffer_size": 2335,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1778,
-								1778
+								1535,
+								1535
 							]
 						],
 						"settings":
@@ -415,7 +415,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 38.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -423,6 +423,35 @@
 				},
 				{
 					"buffer": 2,
+					"file": "scripts/Ben questions.txt",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "scripts/input_files.py",
 					"semi_transient": false,
 					"settings":
@@ -434,8 +463,8 @@
 						"selection":
 						[
 							[
-								6452,
-								5853
+								8627,
+								8536
 							]
 						],
 						"settings":
@@ -445,14 +474,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1761.0,
+						"translation.y": 2617.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "test_data/CDC0089 01-02-14.txt",
 					"semi_transient": false,
 					"settings":
@@ -482,7 +511,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "run_daily_update.py",
 					"semi_transient": false,
 					"settings":
@@ -510,7 +539,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "run_daily_update_1.py",
 					"semi_transient": false,
 					"settings":
@@ -534,11 +563,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "scripts/execution_wipe_tables.py",
 					"semi_transient": false,
 					"settings":
@@ -566,7 +595,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "scripts/execution_wipe_tables_1.py",
 					"semi_transient": false,
 					"settings":
@@ -590,35 +619,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "scripts/execution_db_utilities.py",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 83,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -648,7 +649,7 @@
 						"translation.y": 900.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -678,7 +679,7 @@
 						"translation.y": 465.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -715,15 +716,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17186,
+						"buffer_size": 11757,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15612,
-								16247
+								11270,
+								11270
 							]
 						],
 						"settings":
@@ -733,10 +734,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5061.0,
+						"translation.y": 3373.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -766,7 +767,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -805,7 +806,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 227.0
+		"height": 399.0
 	},
 	"output.find_results":
 	{
