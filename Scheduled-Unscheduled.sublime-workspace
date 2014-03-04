@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"plot",
+				"plot_dual"
+			],
+			[
+				"stat",
+				"statistic2"
+			],
+			[
+				"statis",
+				"statistic1"
+			],
+			[
 				"in_process",
 				"in_process_dollars"
 			],
@@ -83,23 +95,7 @@
 			"file": "run_reports.py",
 			"settings":
 			{
-				"buffer_size": 1325,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "run_reports_1.py",
-			"settings":
-			{
-				"buffer_size": 2335,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/Ben questions.txt",
-			"settings":
-			{
-				"buffer_size": 1363,
+				"buffer_size": 979,
 				"line_ending": "Unix"
 			}
 		},
@@ -107,7 +103,7 @@
 			"file": "scripts/input_files.py",
 			"settings":
 			{
-				"buffer_size": 9959,
+				"buffer_size": 7988,
 				"line_ending": "Unix"
 			}
 		},
@@ -128,14 +124,6 @@
 			}
 		},
 		{
-			"file": "run_daily_update_1.py",
-			"settings":
-			{
-				"buffer_size": 375,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "scripts/execution_wipe_tables.py",
 			"settings":
 			{
@@ -144,18 +132,10 @@
 			}
 		},
 		{
-			"file": "scripts/execution_wipe_tables_1.py",
-			"settings":
-			{
-				"buffer_size": 52,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "scripts/db_maintenance.py",
 			"settings":
 			{
-				"buffer_size": 5146,
+				"buffer_size": 3911,
 				"line_ending": "Unix"
 			}
 		},
@@ -163,7 +143,7 @@
 			"file": "scripts/output_db.py",
 			"settings":
 			{
-				"buffer_size": 4003,
+				"buffer_size": 2444,
 				"line_ending": "Unix"
 			}
 		},
@@ -179,7 +159,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 11757,
+				"buffer_size": 9639,
 				"line_ending": "Unix"
 			}
 		},
@@ -187,7 +167,7 @@
 			"file": "scripts/input_db.py",
 			"settings":
 			{
-				"buffer_size": 1959,
+				"buffer_size": 1194,
 				"line_ending": "Unix"
 			}
 		}
@@ -223,6 +203,9 @@
 	},
 	"file_history":
 	[
+		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/execution_wipe_tables.py",
+		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/run_daily_update.py",
+		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/run_reports.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/data/CDC0089 01-01-14.txt",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/data/2013-06-15 CDC0089.txt",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/test_db/run_daily_update.py",
@@ -230,7 +213,6 @@
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/Ben questions.txt",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/input_files.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/execution_get_backlogs.py",
-		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/run_reports.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/execution_db_utilities.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/db_maintenance.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/processing.py",
@@ -254,7 +236,6 @@
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/data/2013-06-06 CDC0089.txt",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/data/2013-06-14 CDC0089.txt",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/AAA_sched_unsched.py",
-		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/execution_wipe_tables.py",
 		"/Users/kbrooks/Documents/UD359 IDS/Project 2/proj2_test_df.csv",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/execution_update_db.py",
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/scripts/hello world.py",
@@ -298,6 +279,14 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"incr_db_update_1",
+			"fac_to_db_1",
+			"count_db_records_1",
+			"read_file_1",
+			"read_dir_1",
+			"get_facility_db_1",
+			"create_database_1",
+			"wipe_tables_1",
 			"orders",
 			"\"",
 			"\",",
@@ -325,6 +314,14 @@
 		"regex": false,
 		"replace_history":
 		[
+			"incr_db_update",
+			"fac_to_db",
+			"count_db_records",
+			"read_file",
+			"read_dir",
+			"get_facility_db",
+			"create_database",
+			"wipe_tables",
 			"dollars",
 			"units",
 			"lines",
@@ -362,7 +359,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -371,15 +368,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1325,
+						"buffer_size": 979,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1324,
-								1324
+								978,
+								978
 							]
 						],
 						"settings":
@@ -388,83 +385,26 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "run_reports_1.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2335,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1535,
-								1535
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 38.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "scripts/Ben questions.txt",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1363,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
+					"buffer": 1,
 					"file": "scripts/input_files.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9959,
+						"buffer_size": 7988,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8627,
-								8536
+								6636,
+								6636
 							]
 						],
 						"settings":
@@ -474,14 +414,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2617.0,
+						"translation.y": 1730.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 2,
 					"file": "test_data/CDC0089 01-02-14.txt",
 					"semi_transient": false,
 					"settings":
@@ -504,14 +444,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1009.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "run_daily_update.py",
 					"semi_transient": false,
 					"settings":
@@ -524,7 +464,7 @@
 						[
 							[
 								369,
-								0
+								369
 							]
 						],
 						"settings":
@@ -535,39 +475,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "run_daily_update_1.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 375,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								375,
-								375
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
+					"buffer": 4,
 					"file": "scripts/execution_wipe_tables.py",
 					"semi_transient": false,
 					"settings":
@@ -580,7 +492,7 @@
 						[
 							[
 								50,
-								0
+								50
 							]
 						],
 						"settings":
@@ -589,101 +501,73 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "scripts/execution_wipe_tables_1.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 52,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								52,
-								52
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "scripts/db_maintenance.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5146,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5125,
-								5125
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 900.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "scripts/output_db.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4003,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3554,
-								2953
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 465.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 5,
+					"file": "scripts/db_maintenance.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3911,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3909,
+								3909
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 449.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "scripts/output_db.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2444,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29,
+								20
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "how_to_import.py",
 					"semi_transient": false,
 					"settings":
@@ -707,24 +591,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 8,
 					"file": "scripts/processing.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11757,
+						"buffer_size": 9639,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11270,
-								11270
+								8295,
+								8295
 							]
 						],
 						"settings":
@@ -734,27 +618,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3373.0,
+						"translation.y": 2065.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 9,
 					"file": "scripts/input_db.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1959,
+						"buffer_size": 1194,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1636,
-								1636
+								871,
+								871
 							]
 						],
 						"settings":
@@ -767,7 +651,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -806,7 +690,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 399.0
+		"height": 270.0
 	},
 	"output.find_results":
 	{

@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import output_db as o_db
 import input_db as i_db
@@ -130,10 +131,10 @@ def create_data_frame_1(facility, facility_data_db):
     # index on date?
     df.index = df['date']
     df = df.sort(['date'])
-    df['ship_MA10_orders'] = pd.rolling_median(df['ship_orders'],10)
-    df['ship_MA10_lines'] = pd.rolling_median(df['ship_lines'],10)
-    df['ship_MA10_units'] = pd.rolling_median(df['ship_units'],10)
-    df['ship_MA10_dollars'] = pd.rolling_median(df['ship_dollars'],10)
+    df['ship_MA10_orders'] = pd.rolling_quantile(df['ship_orders'], 5, 0.75)
+    df['ship_MA10_lines'] = pd.rolling_quantile(df['ship_lines'], 5, 0.75)
+    df['ship_MA10_units'] = pd.rolling_quantile(df['ship_units'], 5, 0.75)
+    df['ship_MA10_dollars'] = pd.rolling_quantile(df['ship_dollars'],5, 0.75)
     df['in_process_orders'] = df['sched_orders'] + df['unsched_orders'] + df['old_orders'] + df['fut_orders'] + df['hold_orders']
     df['in_process_lines'] = df['sched_lines'] + df['unsched_lines'] + df['old_lines'] + df['fut_lines'] + df['hold_lines']
     df['in_process_units'] = df['sched_units'] + df['unsched_units'] + df['old_units'] + df['fut_units'] + df['hold_units']
@@ -221,6 +222,11 @@ if __name__ == '__main__':
 
     path = '../db/'
     facility_data_db = i_db.get_facility_db(path)
+
+# ------------- Build Facility Objects --------------
+    Gahanna = Facility("GAH", facility_data_db)
+    print Gahanna.df['ship_dollars'].tail()
+    print Gahanna.df['ship_MA10_dollars'].tail()
 
 
 
