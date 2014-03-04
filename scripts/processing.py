@@ -219,21 +219,15 @@ class Facility(object):
     def __init__(self, name, data_dict):
         # build the data frame here
         self.name = name
-        self.df = create_data_frame(name, data_dict)
-        self.df['new_col'] = self.df['old'] + self.df['new']
+        self.df = create_data_frame_1(name, data_dict)
+        #self.df['new_col'] = self.df['old'] + self.df['new']
+    def plot_trend(self, statistic):
+        '''Plots trends of specified statistic over time in a specified facility'''
+        self.df[statistic].plot()
+        plt.title(statistic + " in " + self.name)
+        plt.show()
         
-        facility_list = [value for value in data_dict.values() if value.location == name]
-        for i, date_object in enumerate(facility_list):
-            if i > 10:
-                cumsum, cumcount = 0, 0
-                for j in xrange(0,9):
-                    if facility_list[i-j].ship >0:
-                        cumsum += facility_list[i-j].ship
-                        cumcount += 1
-                # this should be in a higher object or a separate list or smth
-                date_object.ship_MA10 = int(cumsum/cumcount)
-            else:
-                date_object.ship_MA10 = 0
+
         
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
@@ -275,118 +269,6 @@ def incr_db_update_1():
     # checks
         assert len(facility_data_db) + len(missing_records) == len(facility_data)
 
-def calc_facility_backlog(facility, facility_data_db):
-    '''Calculates backlog in a facility over time and returns most recent backlog'''
-    # Accept only "GAH", "ASH", "GRO"
-    # Cycle through facility_data_db, pulling values for facility into a list
-    facility_list = [value for value in facility_data_db.values() if value.location == facility]
-    
-    # calculate the orders in process
-    #for date_object in facility_list:
-    #    date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
-  
-    # order the list by date
-    facility_list.sort(key=lambda x: x.date)
-    
-    # calculate moving average processing (eliminating zeros)
-    for i, date_object in enumerate(facility_list):
-        if i > 10:
-            cumsum = 0
-            cumcount = 0
-            for j in xrange(0,9):
-                if facility_list[i-j].ship >0:
-                    cumsum += facility_list[i-j].ship
-                    cumcount += 1
-            date_object.ship_MA10 = int(cumsum/cumcount)
-        else:
-            date_object.ship_MA10 = 0
-
-    # calculate backlog
-    for date_object in facility_list:
-        if date_object.ship_MA10 >0:
-            date_object.backlog = float(date_object.in_process)/date_object.ship_MA10
-        elif date_object.ship > 0:
-            date_object.backlog = float(date_object.in_process)/date_object.ship
-        else:
-            date_object.backlog = None
-    
-    return facility_list[-1]
-
-def calc_facility_backlog_1(facility, facility_data_db):
-    '''Calculates backlog in a facility over time and returns most recent backlog'''
-    # Accept only "GAH", "ASH", "GRO"
-    # Cycle through facility_data_db, pulling values for facility into a list
-    facility_list = [value for value in facility_data_db.values() if value.location == facility]
-    
-    # calculate the orders in process
-    #for date_object in facility_list:
-    #    date_object.in_process = date_object.sched + date_object.unsched + date_object.old + date_object.future + date_object.hold
-  
-    # order the list by date
-    facility_list.sort(key=lambda x: x.date)
-    
-    # calculate moving average processing (eliminating zeros)
-    for i, date_object in enumerate(facility_list):
-        if i > 10:
-            cumsum = 0
-            cumcount = 0
-            for j in xrange(0,9):
-                if facility_list[i-j].ship_dollars >0:
-                    cumsum += facility_list[i-j].ship_dollars
-                    cumcount += 1
-            date_object.ship_MA10_dollars = int(cumsum/cumcount)
-        else:
-            date_object.ship_MA10_dollars = 0
-
-    # calculate backlog
-    for date_object in facility_list:
-        if date_object.ship_MA10_dollars >0:
-            date_object.backlog_dollars = float(date_object.in_process_dollars)/date_object.ship_MA10_dollars
-        elif date_object.ship_dollars > 0:
-            date_object.backlog_dollars = float(date_object.in_process_dollars)/date_object.ship_dollars
-        else:
-            date_object.backlog_dollars = None
-    
-    return facility_list[-1]
-
-def plot_facility_trends(facility, statistic):
-    '''Plots trends of specified statistic over time in a specified facility'''
-    # Accept only "GAH", "ASH", "GRO"
-    assert facility in ["GAH", "GRO", "ASH"]
-    assert statistic in ['new', 'sched', 'unsched', 'ship', 'susp', 'old', 'future', 'hold', 'in_process']
-    # Cycle through facility_data_db, pulling values for facility into a list
-    path = './db/'
-    facility_data_db = i_db.get_facility_db(path)
-    df = create_data_frame(facility, facility_data_db)
-    df[statistic].plot()
-    plt.title(statistic + " in " + facility)
-
-    plt.show()
-
-def plot_facility_trends_1(facility, statistic):
-    '''Plots trends of specified statistic over time in a specified facility'''
-    # Accept only "GAH", "ASH", "GRO"
-    assert facility in ["GAH", "GRO", "ASH", "RYE", "DES", "TOT"]
-    # assert statistic in ["new_orders", "new_lines", "new_units", "new_dollars",    
-    #            "sched_orders", "sched_lines", "sched_units", "sched_dollars",  
-    #            "unsched_orders", "unsched_lines", "unsched_units", "unsched_dollars",
-    #            "ship_orders", "ship_lines", "ship_units", "ship_dollars",   
-    #            "susp_orders", "susp_lines", "susp_units", "susp_dollars",   
-    #            "old_orders", "old_lines", "old_units", "old_dollars",    
-    #            "fut_orders", "fut_lines", "fut_units", "fut_dollars",    
-    #            "hold_orders", "hold_lines", "hold_units", "hold_dollars"]
-    # Cycle through facility_data_db, pulling values for facility into a list
-    path = './db/'
-    facility_data_db = i_db.get_facility_db_1(path)
-    df = create_data_frame_1(facility, facility_data_db)
-    df[statistic].plot()
-    plt.title(statistic + " in " + facility)
-
-    plt.show()
-
-
-
-
 
 if __name__ == '__main__':
     print "------------------- Unit tests -------------------"
@@ -406,9 +288,7 @@ if __name__ == '__main__':
 # debug backlogs
 
     path = '../db/'
-    facility_data_db = i_db.get_facility_db(path)
-    ASH_today = calc_facility_backlog("ASH", facility_data_db)
-    print "ASH new:", ASH_today.new, "sched:", ASH_today.sched,  "backlog:", ASH_today.backlog
+    facility_data_db = i_db.get_facility_db_1(path)
 
 
 
