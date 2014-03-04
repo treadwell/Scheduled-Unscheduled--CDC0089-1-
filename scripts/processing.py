@@ -159,15 +159,26 @@ class Facility(object):
         plt.title(statistic + " in " + self.name)
         plt.show()
 
+    def plot_dual(self, statistic1, statistic2):
+        '''Plots trends of specified statistic over time in a specified facility'''
+        self.df[statistic1].plot()
+        self.df[statistic2].plot()
+        plt.title(self.name)
+        plt.legend()
+        plt.show()
+
     def warnings(self):
         '''identifies potential warning conditions'''
         # Backlogs
         if self.df['backlog_dollars'].iget(-1) > 3:
             print self.name, "dollar backlog > 3 days (", self.df['backlog_dollars'].iget(-1), ")"
+            self.plot_dual("in_process_dollars", "ship_MA10_dollars")
         if self.df['backlog_lines'].iget(-1) > 3:
             print self.name, "line backlog > 3 days (", self.df['backlog_lines'].iget(-1), ")"
+            self.plot_dual("in_process_lines", "ship_MA10_lines")
         if self.df['backlog_units'].iget(-1) >3: 
             print self.name, "unit backlog > 3 days (", self.df['backlog_units'].iget(-1), ")"
+            self.plot_dual("in_process_units", "ship_MA10_units")
         
 
 def incr_db_update():
