@@ -26,30 +26,20 @@ Ryerson = p.Facility("RYE", facility_data_db)
 #DeSoto = p.Facility("DES", facility_data_db)
 TotalDomestic = p.Facility("TOT", facility_data_db)
 
-print "Gahanna backlogs:"
-print "Dollar backlog: ", Gahanna.df['backlog_dollars'].iget(-1)
-print "Line backlog: ", Gahanna.df['backlog_lines'].iget(-1) 
-print "Unit backlog: ", Gahanna.df['backlog_units'].iget(-1) 
-print "----------"
-print "Ashland backlogs:"
-print "Dollar backlog: ", Ashland.df['backlog_dollars'].iget(-1)
-print "Line backlog: ", Ashland.df['backlog_lines'].iget(-1) 
-print "Unit backlog: ", Ashland.df['backlog_units'].iget(-1) 
-print "----------"
-print "Groveport backlogs:"
-print "Dollar backlog: ", Groveport.df['backlog_dollars'].iget(-1)
-print "Line backlog: ", Groveport.df['backlog_lines'].iget(-1) 
-print "Unit backlog: ", Groveport.df['backlog_units'].iget(-1) 
-
+Gahanna.warnings()
 Gahanna.plot_trend("backlog_dollars")
-Gahanna.plot_trend("backlog_lines")
+Ashland.warnings()
+Groveport.warnings()
+Ryerson.warnings()
+TotalDomestic.warnings()
 
-Ashland.plot_trend("backlog_dollars")
-Ashland.plot_trend("backlog_lines")
-Ashland.plot_trend("backlog_units")
+Gahanna.plot_trend("new_dollars")
 
-Groveport.plot_trend("backlog_dollars")
-Groveport.plot_trend("backlog_lines")
+Ashland.plot_trend("new_dollars")
+Ashland.plot_trend("new_units")
+
+Groveport.plot_trend("new_dollars")
+Groveport.plot_trend("new_units")
 
 #print Gahanna.df['backlog_dollars'].last()  # syntax for last item in a dataframe
 

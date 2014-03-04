@@ -221,13 +221,23 @@ class Facility(object):
         self.name = name
         self.df = create_data_frame_1(name, data_dict)
         #self.df['new_col'] = self.df['old'] + self.df['new']
+    
     def plot_trend(self, statistic):
         '''Plots trends of specified statistic over time in a specified facility'''
         self.df[statistic].plot()
         plt.title(statistic + " in " + self.name)
         plt.show()
-        
 
+    def warnings(self):
+        '''identifies potential warning conditions'''
+        # Backlogs
+        if self.df['backlog_dollars'].iget(-1) > 3:
+            print self.name, "dollar backlog > 3 days (", self.df['backlog_dollars'].iget(-1), ")"
+        if self.df['backlog_lines'].iget(-1) > 3:
+            print self.name, "line backlog > 3 days (", self.df['backlog_lines'].iget(-1), ")"
+        if self.df['backlog_units'].iget(-1) >3: 
+            print self.name, "unit backlog > 3 days (", self.df['backlog_units'].iget(-1), ")"
+        
         
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
