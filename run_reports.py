@@ -14,7 +14,7 @@ Gahanna = p.Facility("GAH", facility_data_db)
 Ashland = p.Facility("ASH", facility_data_db)
 Groveport = p.Facility("GRO", facility_data_db)
 Ryerson = p.Facility("RYE", facility_data_db)
-#DeSoto = p.Facility("DES", facility_data_db)
+DeSoto = p.Facility("DES", facility_data_db)
 TotalDomestic = p.Facility("TOT", facility_data_db)
 
 
@@ -37,4 +37,3 @@ Ashland.plot_trend("new_units")
 
 Groveport.plot_trend("new_dollars")
 Groveport.plot_trend("new_units")
-
