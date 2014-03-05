@@ -171,6 +171,7 @@ class Facility(object):
     def warnings(self):
         '''identifies potential warning conditions'''
         # Backlogs
+        print "running backlog warnings for", self.name, "..."
         if self.df['backlog_dollars'].iget(-1) > 3:
             print self.name, "dollar backlog > 3 days (", self.df['backlog_dollars'].iget(-1), ")"
             self.plot_dual("in_process_dollars", "ship_MA10_dollars")
@@ -180,6 +181,7 @@ class Facility(object):
         if self.df['backlog_units'].iget(-1) >3: 
             print self.name, "unit backlog > 3 days (", self.df['backlog_units'].iget(-1), ")"
             self.plot_dual("in_process_units", "ship_MA10_units")
+        print "backlog warnings for", self.name, "complete."
         
 
 def incr_db_update():
