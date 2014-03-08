@@ -229,6 +229,7 @@ if __name__ == '__main__':
 
 # ------------- Build Facility Objects --------------
     Gahanna = Facility("GAH", facility_data_db)
+
     print Gahanna.df['ship_dollars'].tail()
     print Gahanna.df['ship_MA10_dollars'].tail()
 
@@ -245,6 +246,7 @@ if __name__ == '__main__':
     # e = g.new_dollars[Gahanna.df.weekday==4]
     # f = g.new_dollars[Gahanna.df.weekday==5]
     # g = g.new_dollars[Gahanna.df.weekday==6]
+
     # a.plot()
     # b.plot()
     # c.plot()
@@ -253,7 +255,33 @@ if __name__ == '__main__':
     # f.plot()
     # g.plot()
 
-    plt.show()
 
+    ### version 2
+    # grouped = g.groupby(g.weekday)
+
+    # for name, group in grouped:
+    #     group.new_dollars.plot()
+        
+
+    #plt.legend()
+    # plt.show()
+
+    ### version 3
+    grouped = g.groupby(g.weekday)
+
+    L = len(grouped)
+    height = 2
+    length = (L+1)//2
+    
+    for i, (name, group) in enumerate(grouped):
+        plt.subplot(height*100 + length*10 + (i+1))
+        ## should probably be done as string concatenation
+        group.new_dollars.plot()
+        
+
+    # http://matplotlib.org/examples/pylab_examples/anscombe.html
+
+    #plt.legend()
+    plt.show()
 
 
