@@ -229,23 +229,51 @@ if __name__ == '__main__':
 
 # ------------- Build Facility Objects --------------
     Gahanna = Facility("GAH", facility_data_db)
-    print Gahanna.df['ship_dollars'].tail()
-    print Gahanna.df['ship_MA10_dollars'].tail()
-    a = Gahanna.df.new_dollars[Gahanna.df.weekday==0]
-    b = Gahanna.df.new_dollars[Gahanna.df.weekday==2]
-    c = Gahanna.df.new_dollars[Gahanna.df.weekday==3]
-    d = Gahanna.df.new_dollars[Gahanna.df.weekday==4]
-    e = Gahanna.df.new_dollars[Gahanna.df.weekday==5]
-    f = Gahanna.df.new_dollars[Gahanna.df.weekday==6]
-    g = Gahanna.df.new_dollars[Gahanna.df.weekday==7]
-    a.plot()
-    b.plot()
-    c.plot()
-    d.plot()
-    e.plot()
-    f.plot()
+    g = Gahanna.df
+    print g['ship_dollars'].tail()
+    print g['ship_MA10_dollars'].tail()
+    
+    ### version 1
+    # a = Gahanna.df.new_dollars[Gahanna.df.weekday==0]
+    # b = Gahanna.df.new_dollars[Gahanna.df.weekday==2]
+    # c = Gahanna.df.new_dollars[Gahanna.df.weekday==3]
+    # d = Gahanna.df.new_dollars[Gahanna.df.weekday==4]
+    # e = Gahanna.df.new_dollars[Gahanna.df.weekday==5]
+    # f = Gahanna.df.new_dollars[Gahanna.df.weekday==6]
+    # g = Gahanna.df.new_dollars[Gahanna.df.weekday==7]
+    # a.plot()
+    # b.plot()
+    # c.plot()
+    # d.plot()
+    # e.plot()
+    # f.plot()
 
+    ### version 2
+    # grouped = g.groupby(g.weekday)
+
+    # for name, group in grouped:
+    #     group.new_dollars.plot()
+        
+
+    #plt.legend()
+    # plt.show()
+
+    ### version 3
+    grouped = g.groupby(g.weekday)
+
+    L = len(grouped)
+    height = 2
+    length = (L+1)//2
+    
+    for i, (name, group) in enumerate(grouped):
+        plt.subplot(height*100 + length*10 + (i+1))
+        ## should probably be done as string concatenation
+        group.new_dollars.plot()
+        
+
+    # http://matplotlib.org/examples/pylab_examples/anscombe.html
+
+    #plt.legend()
     plt.show()
-
 
 
