@@ -231,7 +231,21 @@ if __name__ == '__main__':
     Gahanna = Facility("GAH", facility_data_db)
     print Gahanna.df['ship_dollars'].tail()
     print Gahanna.df['ship_MA10_dollars'].tail()
-    print Gahanna.df.weekday.tail()
+    a = Gahanna.df.new_dollars[Gahanna.df.weekday==0]
+    b = Gahanna.df.new_dollars[Gahanna.df.weekday==2]
+    c = Gahanna.df.new_dollars[Gahanna.df.weekday==3]
+    d = Gahanna.df.new_dollars[Gahanna.df.weekday==4]
+    e = Gahanna.df.new_dollars[Gahanna.df.weekday==5]
+    f = Gahanna.df.new_dollars[Gahanna.df.weekday==6]
+    g = Gahanna.df.new_dollars[Gahanna.df.weekday==7]
+    a.plot()
+    b.plot()
+    c.plot()
+    d.plot()
+    e.plot()
+    f.plot()
+
+    plt.show()
 
 
 
