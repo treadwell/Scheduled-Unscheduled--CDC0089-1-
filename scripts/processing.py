@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import output_db as o_db
 import input_db as i_db
 import input_files as i_files
+import datetime
 
 ### Processing Layer ###
 
@@ -131,6 +132,7 @@ def create_data_frame_1(facility, facility_data_db):
     # index on date?
     df.index = df['date']
     df = df.sort(['date'])
+    df['weekday'] = df['date'].apply(lambda d: datetime.datetime.weekday(d))
     df['ship_MA10_orders'] = pd.rolling_quantile(df['ship_orders'], 5, 0.75)
     df['ship_MA10_lines'] = pd.rolling_quantile(df['ship_lines'], 5, 0.75)
     df['ship_MA10_units'] = pd.rolling_quantile(df['ship_units'], 5, 0.75)
@@ -229,6 +231,7 @@ if __name__ == '__main__':
     Gahanna = Facility("GAH", facility_data_db)
     print Gahanna.df['ship_dollars'].tail()
     print Gahanna.df['ship_MA10_dollars'].tail()
+    print Gahanna.df.weekday.tail()
 
 
 
