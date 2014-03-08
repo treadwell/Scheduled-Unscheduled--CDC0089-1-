@@ -237,24 +237,14 @@ if __name__ == '__main__':
 
     weekday_groups = g.groupby(g.weekday)
 
-    for group in weekday_groups:
-        group.weekday.plot()
-    # a = g.new_dollars[Gahanna.df.weekday==0]
-    # b = g.new_dollars[Gahanna.df.weekday==1]
-    # c = g.new_dollars[Gahanna.df.weekday==2]
-    # d = g.new_dollars[Gahanna.df.weekday==3]
-    # e = g.new_dollars[Gahanna.df.weekday==4]
-    # f = g.new_dollars[Gahanna.df.weekday==5]
-    # g = g.new_dollars[Gahanna.df.weekday==6]
+    for name, group in weekday_groups:
+        #group.new_dollars.plot()
+        #plt.plot(group.new_dollars, label = name)
+        group.smooth = pd.rolling_mean(group.new_dollars, window = 10)
+        plt.plot(group.smooth, label = 'rolling({k})'.format(k=name))
 
-    # a.plot()
-    # b.plot()
-    # c.plot()
-    # d.plot()
-    # e.plot()
-    # f.plot()
-    # g.plot()
-
+    plt.legend(loc = "best")
+    plt.show()
 
     ### version 2
     # grouped = g.groupby(g.weekday)
