@@ -231,19 +231,27 @@ if __name__ == '__main__':
     Gahanna = Facility("GAH", facility_data_db)
     print Gahanna.df['ship_dollars'].tail()
     print Gahanna.df['ship_MA10_dollars'].tail()
-    a = Gahanna.df.new_dollars[Gahanna.df.weekday==0]
-    b = Gahanna.df.new_dollars[Gahanna.df.weekday==2]
-    c = Gahanna.df.new_dollars[Gahanna.df.weekday==3]
-    d = Gahanna.df.new_dollars[Gahanna.df.weekday==4]
-    e = Gahanna.df.new_dollars[Gahanna.df.weekday==5]
-    f = Gahanna.df.new_dollars[Gahanna.df.weekday==6]
-    g = Gahanna.df.new_dollars[Gahanna.df.weekday==7]
-    a.plot()
-    b.plot()
-    c.plot()
-    d.plot()
-    e.plot()
-    f.plot()
+
+    g = Gahanna.df
+
+    weekday_groups = g.groupby(g.weekday)
+
+    for group in weekday_groups:
+        group.weekday.plot()
+    # a = g.new_dollars[Gahanna.df.weekday==0]
+    # b = g.new_dollars[Gahanna.df.weekday==1]
+    # c = g.new_dollars[Gahanna.df.weekday==2]
+    # d = g.new_dollars[Gahanna.df.weekday==3]
+    # e = g.new_dollars[Gahanna.df.weekday==4]
+    # f = g.new_dollars[Gahanna.df.weekday==5]
+    # g = g.new_dollars[Gahanna.df.weekday==6]
+    # a.plot()
+    # b.plot()
+    # c.plot()
+    # d.plot()
+    # e.plot()
+    # f.plot()
+    # g.plot()
 
     plt.show()
 
