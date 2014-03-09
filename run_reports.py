@@ -30,10 +30,10 @@ TotalDomestic.warnings()
 
 # ------------- Plot basic trends --------------
 
-Gahanna.plot_trend("new_dollars")
+Gahanna.plot_stats()
 
-Ashland.plot_trend("new_dollars")
-Ashland.plot_trend("new_units")
+Ashland.plot_stats()
 
-Groveport.plot_trend("new_dollars")
-Groveport.plot_trend("new_units")
+
+Groveport.plot_stats()
+

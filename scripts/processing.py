@@ -159,15 +159,36 @@ class Facility(object):
     def plot_trend(self, statistic):
         '''Plots trends of specified statistic over time in a specified facility'''
         self.df[statistic].plot()
+        stat_smooth = pd.rolling_median(self.df[statistic], 10)
+        #plt.plot(stat_smooth, label = 'rolling({k})'.format(k=statistic))
+        stat_smooth.plot(label = 'rolling({k})'.format(k=statistic))
         plt.title(statistic + " in " + self.name)
+        plt.legend(loc = "best")
         plt.show()
 
     def plot_dual(self, statistic1, statistic2):
-        '''Plots trends of specified statistic over time in a specified facility'''
+        '''Plots trends of two specified statistics over time on the same axis'''
         self.df[statistic1].plot()
         self.df[statistic2].plot()
         plt.title(self.name)
         plt.legend()
+        plt.show()
+
+    def plot_stats(self):
+        '''Plots units and dollar trends of major facility stats in a lattice plot'''
+        plot_list= [self.df.new_units, self.df.new_dollars,self.df.ship_units, self.df.ship_dollars, \
+              self.df.old_units, self.df.old_dollars, self.df.backlog_units, self.df.backlog_dollars]
+        height = len(plot_list) / 2
+        length = 2
+        # add subplot titles and spacing
+
+        for i, statistic in enumerate(plot_list):
+            plt.subplot(height*100 + length*10 + (i+1))
+            print 
+            statistic.plot() 
+            plt.title(statistic.name)
+        plt.subplots_adjust(hspace= 1.5)
+        plt.suptitle(self.name)
         plt.show()
 
     def warnings(self):
@@ -234,6 +255,9 @@ if __name__ == '__main__':
     print Gahanna.df['ship_MA10_dollars'].tail()
 
     g = Gahanna.df
+
+    Gahanna.plot_trend("new_orders")
+    Gahanna.plot_stats()
 
     weekday_groups = g.groupby(g.weekday)
 
