@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"new_dollars"
+			],
+			[
+				"week",
+				"weekday_groups"
+			],
+			[
 				"plot",
 				"plot_dual"
 			],
@@ -95,7 +103,7 @@
 			"file": "run_reports.py",
 			"settings":
 			{
-				"buffer_size": 979,
+				"buffer_size": 876,
 				"line_ending": "Unix"
 			}
 		},
@@ -159,7 +167,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 10138,
+				"buffer_size": 12069,
 				"line_ending": "Unix"
 			}
 		},
@@ -359,7 +367,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -368,15 +376,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 979,
+						"buffer_size": 876,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								305,
-								144
+								875,
+								875
 							]
 						],
 						"settings":
@@ -384,10 +392,10 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 223.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -475,7 +483,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -600,15 +608,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10138,
+						"buffer_size": 12069,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10127,
-								10127
+								8762,
+								8762
 							]
 						],
 						"settings":
@@ -617,11 +625,11 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 3244.0,
+						"translation.x": 0.0,
+						"translation.y": 2703.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -690,7 +698,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 258.0
+		"height": 311.0
 	},
 	"output.find_results":
 	{
