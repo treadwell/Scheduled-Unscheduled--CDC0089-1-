@@ -29,7 +29,7 @@ test.index = pd.to_datetime(test.index)
 
 #test = test[-100:] # speed up ARIMA calculations for testing
 
-p, d, q = 0, 2, 1
+p, d, q = 7, 2, 0
 model = a(test, (p, d, q))
 x = model.fit()
 MA = x.predict()

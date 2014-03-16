@@ -133,6 +133,7 @@ def create_data_frame_1(facility, facility_data_db):
     df.index = df['date']
     df = df.sort(['date'])
     df['weekday'] = df['date'].apply(lambda d: datetime.datetime.weekday(d))
+    df['day_of_year'] = df['date'].apply(lambda d: d.toordinal() - datetime.date(d.year, 1, 1).toordinal() + 1)
     df['ship_MA10_orders'] = pd.rolling_quantile(df['ship_orders'], 5, 0.75)
     df['ship_MA10_lines'] = pd.rolling_quantile(df['ship_lines'], 5, 0.75)
     df['ship_MA10_units'] = pd.rolling_quantile(df['ship_units'], 5, 0.75)
@@ -251,8 +252,8 @@ if __name__ == '__main__':
 # ------------- Build Facility Objects --------------
     Gahanna = Facility("GAH", facility_data_db)
 
-    print Gahanna.df['ship_dollars'].tail()
-    print Gahanna.df['ship_MA10_dollars'].tail()
+    print Gahanna.df['weekday'].tail()
+    print Gahanna.df['day_of_year'].tail()
 
     g = Gahanna.df
 

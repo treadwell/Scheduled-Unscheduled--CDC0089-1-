@@ -2,6 +2,7 @@ import scripts.processing as p
 import scripts.input_db as i_db
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # ------ Get facility data from database ------
 
@@ -30,3 +31,4 @@ TotalDomestic.warnings()
 Gahanna.plot_stats()
 Ashland.plot_stats()
 Groveport.plot_stats()
+
