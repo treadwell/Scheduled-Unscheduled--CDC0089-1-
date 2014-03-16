@@ -3,13 +3,13 @@ import scripts.input_db as i_db
 import os
 import pandas as pd
 
-# Calculate facility backlogs
+# ------ Get facility data from database ------
 
-#print os.getcwd()
 path = './db/'
 facility_data_db = i_db.get_facility_db(path)
 
 # ------------- Build Facility Objects --------------
+
 Gahanna = p.Facility("GAH", facility_data_db)
 Ashland = p.Facility("ASH", facility_data_db)
 Groveport = p.Facility("GRO", facility_data_db)
@@ -17,23 +17,16 @@ Ryerson = p.Facility("RYE", facility_data_db)
 DeSoto = p.Facility("DES", facility_data_db)
 TotalDomestic = p.Facility("TOT", facility_data_db)
 
-
 # ------------- Print warnings --------------
+
 Gahanna.warnings()
 Ashland.warnings()
 Groveport.warnings()
 Ryerson.warnings()
 TotalDomestic.warnings()
 
-# add plotting of relevant charts when warning is triggered
-
-
-# ------------- Plot basic trends --------------
+# ------------- Plot basic trend panels --------------
 
 Gahanna.plot_stats()
-
 Ashland.plot_stats()
-
-
 Groveport.plot_stats()
-
