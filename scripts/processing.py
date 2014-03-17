@@ -195,17 +195,41 @@ class Facility(object):
     def warnings(self):
         '''identifies potential warning conditions'''
         # Backlogs
-        print "running backlog warnings for", self.name, "..."
+        print "running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
         if self.df['backlog_dollars'].iget(-1) > 3:
-            print self.name, "dollar backlog > 3 days (", self.df['backlog_dollars'].iget(-1), ")"
+            print "\t", self.name, "dollar backlog > 3 days (", "{:4.2f}".format(self.df['backlog_dollars'].iget(-1)), "):"
+            print "\t\tIn process dollars:", self.df['in_process_dollars'].iget(-1)
+            print "\t\t\tNew:", self.df['new_dollars'].iget(-1), "{:10.2f}".format(self.df['new_dollars'].iget(-1) / self.df['ship_MA10_dollars'].iget(-1))
+            print "\t\t\tOld:", self.df['old_dollars'].iget(-1)
+            print "\t\t\tSched:", self.df['sched_dollars'].iget(-1)
+            print "\t\t\tUnsched:", self.df['unsched_dollars'].iget(-1)
+            print "\t\t\tFuture:", self.df['fut_dollars'].iget(-1)
+            print "\t\t\tHold:", self.df['hold_dollars'].iget(-1)
+            print "\t\tMA dollar shipping:", self.df['ship_MA10_dollars'].iget(-1)
             self.plot_dual("in_process_dollars", "ship_MA10_dollars")
         if self.df['backlog_lines'].iget(-1) > 3:
-            print self.name, "line backlog > 3 days (", self.df['backlog_lines'].iget(-1), ")"
+            print "\t", self.name, "line backlog > 3 days (", "{:4.2f}".format(self.df['backlog_lines'].iget(-1)), ")"
+            print "\t\tIn process lines:", self.df['in_process_lines'].iget(-1)
+            print "\t\t\tNew:", self.df['new_lines'].iget(-1)
+            print "\t\t\tOld:", self.df['old_lines'].iget(-1)
+            print "\t\t\tSched:", self.df['sched_lines'].iget(-1)
+            print "\t\t\tUnsched:", self.df['unsched_lines'].iget(-1)
+            print "\t\t\tFuture:", self.df['fut_lines'].iget(-1)
+            print "\t\t\tHold:", self.df['hold_lines'].iget(-1)
+            print "\t\tMA line shipping:", self.df['ship_MA10_lines'].iget(-1)
             self.plot_dual("in_process_lines", "ship_MA10_lines")
         if self.df['backlog_units'].iget(-1) >3: 
-            print self.name, "unit backlog > 3 days (", self.df['backlog_units'].iget(-1), ")"
+            print "\t", self.name, "unit backlog > 3 days (", "{:4.2f}".format(self.df['backlog_units'].iget(-1)), ")"
+            print "\t\tIn process units:", self.df['in_process_units'].iget(-1)
+            print "\t\t\tNew:", self.df['new_units'].iget(-1)
+            print "\t\t\tOld:", self.df['old_units'].iget(-1)
+            print "\t\t\tSched:", self.df['sched_units'].iget(-1)
+            print "\t\t\tUnsched:", self.df['unsched_units'].iget(-1)
+            print "\t\t\tFuture:", self.df['fut_units'].iget(-1)
+            print "\t\t\tHold:", self.df['hold_units'].iget(-1)
+            print "\t\tMA unit shipping:", self.df['ship_MA10_units'].iget(-1)
             self.plot_dual("in_process_units", "ship_MA10_units")
-        print "backlog warnings for", self.name, "complete."
+        print "backlog warnings for", self.name, "complete.\n"
         
 
 def incr_db_update():
