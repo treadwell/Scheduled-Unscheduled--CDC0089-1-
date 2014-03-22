@@ -175,7 +175,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 12173,
+				"buffer_size": 14030,
 				"line_ending": "Unix"
 			}
 		},
@@ -399,8 +399,8 @@
 						"selection":
 						[
 							[
-								849,
-								849
+								440,
+								440
 							]
 						],
 						"settings":
@@ -654,15 +654,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12173,
+						"buffer_size": 14030,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10841,
-								10841
+								10902,
+								10902
 							]
 						],
 						"settings":
@@ -672,7 +672,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3072.0,
+						"translation.y": 3038.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
