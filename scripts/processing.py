@@ -129,10 +129,13 @@ def create_data_frame_1(facility, facility_data_db):
                'old_orders', 'old_lines', 'old_units', 'old_dollars',    
                'fut_orders', 'fut_lines', 'fut_units', 'fut_dollars',    
                'hold_orders', 'hold_lines', 'hold_units', 'hold_dollars'])
-    # index on date?
-    df.index = df['date']
+    
+    ## cast index to datetime; not automatically a datetime for some reason
+    df.index = pd.to_datetime(df.date)
     df = df.sort(['date'])
-    df['weekday'] = df['date'].apply(lambda d: datetime.datetime.weekday(d))
+
+    df['week_num'] = df["date"].apply(lambda x: datetime.date.isocalendar(x)[1])
+    df['week_day'] = df["date"].apply(lambda x: datetime.date.isocalendar(x)[2])
     df['day_of_year'] = df['date'].apply(lambda d: d.toordinal() - datetime.date(d.year, 1, 1).toordinal() + 1)
     df['ship_MA10_orders'] = pd.rolling_quantile(df['ship_orders'], 5, 0.75)
     df['ship_MA10_lines'] = pd.rolling_quantile(df['ship_lines'], 5, 0.75)
@@ -276,7 +279,7 @@ if __name__ == '__main__':
 # ------------- Build Facility Objects --------------
     Gahanna = Facility("GAH", facility_data_db)
 
-    print Gahanna.df['weekday'].tail()
+    print Gahanna.df['week_day'].tail()
     print Gahanna.df['day_of_year'].tail()
 
     g = Gahanna.df
@@ -284,7 +287,7 @@ if __name__ == '__main__':
     Gahanna.plot_trend("new_orders")
     Gahanna.plot_stats()
 
-    weekday_groups = g.groupby(g.weekday)
+    weekday_groups = g.groupby(g.week_day)
 
     for name, group in weekday_groups:
         #group.new_dollars.plot()
@@ -296,7 +299,7 @@ if __name__ == '__main__':
     plt.show()
 
     ### version 2
-    # grouped = g.groupby(g.weekday)
+    # grouped = g.groupby(g.week_day)
 
     # for name, group in grouped:
     #     group.new_dollars.plot()
@@ -306,7 +309,7 @@ if __name__ == '__main__':
     # plt.show()
 
     ### version 3
-    grouped = g.groupby(g.weekday)
+    grouped = g.groupby(g.week_day)
 
     L = len(grouped)
     height = 2

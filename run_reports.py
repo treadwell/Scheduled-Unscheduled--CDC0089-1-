@@ -32,3 +32,4 @@ Gahanna.plot_stats()
 Ashland.plot_stats()
 Groveport.plot_stats()
 
+#print Groveport.df.date.tail()
