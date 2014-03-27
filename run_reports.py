@@ -28,8 +28,13 @@ TotalDomestic.warnings()
 
 # ------------- Plot basic trend panels --------------
 
-Gahanna.plot_stats()
-Ashland.plot_stats()
-Groveport.plot_stats()
+#Gahanna.plot_stats()
+#Ashland.plot_stats()
+#Groveport.plot_stats()
 
-#print Groveport.df.date.tail()
+# -------------- Plot basic summary stats ---------------
+Gahanna.summary()
+Ashland.summary()
+Groveport.summary()
+Ryerson.summary()
+TotalDomestic.summary()

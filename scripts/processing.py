@@ -149,6 +149,10 @@ def create_data_frame_1(facility, facility_data_db):
     df['backlog_lines'] = df['in_process_lines'].div(df['ship_MA10_lines'])
     df['backlog_units'] = df['in_process_units'].div(df['ship_MA10_units'])
     df['backlog_dollars'] = df['in_process_dollars'].div(df['ship_MA10_dollars'])
+    df['units_per_line'] = pd.rolling_mean(df.new_units, 10) / pd.rolling_mean(df.new_lines, 10)
+    df['lines_per_order'] = pd.rolling_mean(df.new_lines, 10) / pd.rolling_mean(df.new_orders, 10)
+    df['dollars_per_unit'] = pd.rolling_mean(df.new_dollars, 10) / pd.rolling_mean(df.new_units, 10) * 1000
+    df['dollars_per_order'] = pd.rolling_mean(df.new_dollars, 10) / pd.rolling_mean(df.new_orders, 10) * 1000
   
     return df        
 
@@ -233,7 +237,21 @@ class Facility(object):
             print "\t\tMA unit shipping:", self.df['ship_MA10_units'].iget(-1)
             self.plot_dual("in_process_units", "ship_MA10_units")
         print "backlog warnings for", self.name, "complete.\n"
+
+    def summary(self):
+        '''prints common summary statistics'''
+        print "running summary statistics for", self.name, self.df['date'].iget(-1), "..."
+        print "\tNew dollars:", self.df.new_dollars.iget(-1)
+        print "\tNew orders:", self.df.new_orders.iget(-1)
+        print "\tNew lines:", self.df.new_lines.iget(-1)
+        print "\tNew units:", self.df.new_units.iget(-1)
         
+
+        print "\tUnits per line:", self.df['units_per_line'].iget(-1)
+        print "\tLines per order:", self.df['lines_per_order'].iget(-1)
+        print "\tDollars per unit:", self.df['dollars_per_unit'].iget(-1)
+        print "\tDollars per order:", self.df['dollars_per_order'].iget(-1)
+        print "summary statistics for", self.name, "complete.\n"
 
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
