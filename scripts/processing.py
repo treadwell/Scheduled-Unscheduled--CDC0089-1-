@@ -134,6 +134,7 @@ def create_data_frame_1(facility, facility_data_db):
     df.index = pd.to_datetime(df.date)
     df = df.sort(['date'])
 
+    df['year'] = df["date"].apply(lambda x: datetime.date.isocalendar(x)[0])
     df['week_num'] = df["date"].apply(lambda x: datetime.date.isocalendar(x)[1])
     df['week_day'] = df["date"].apply(lambda x: datetime.date.isocalendar(x)[2])
     df['day_of_year'] = df['date'].apply(lambda d: d.toordinal() - datetime.date(d.year, 1, 1).toordinal() + 1)

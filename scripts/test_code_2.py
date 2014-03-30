@@ -26,3 +26,52 @@ test['week_day'] = test["date"].apply(lambda x: datetime.date.isocalendar(x)[2])
 # print test['week_day'].head()
 print test.groupby('week_num')['new_dollars'].aggregate(np.sum)
 print test.groupby('week_day')['new_dollars'].aggregate(np.average)
+
+latest_iso_day = test.date.iget(-1)
+latest_iso_week = datetime.date.isocalendar(test.date.iget(-1))[1]
+
+print "latest day:", latest_iso_day
+print "latest week:", latest_iso_week
+
+#split into annual groups
+
+annual_groups = test.groupby('year')
+
+# define a function to calculate cumsum through a particular week from a series
+
+#def calc_cumsum(series, week):
+
+
+# calculate weekly sum and weekly cumsum for each annual group
+
+for name, annual_group in annual_groups:
+	annual_weekly = annual_group.groupby('week_num')['new_dollars'].aggregate(np.sum)
+	annual_cum_weekly = annual_weekly.cumsum()
+	print name, annual_weekly.head()
+	print name, annual_cum_weekly.head()
+
+
+# calc a ytd sum through the previous week
+weekly = test.groupby('week_num')['new_dollars'].aggregate(np.sum)  # this has 2 years of data all munged together in it
+
+print type(weekly)
+print len(weekly)
+
+print "Series name:", weekly.name
+#annual_groups = weekly.groupby('year')
+
+print weekly.head()
+
+cumsum_by_week = weekly.cumsum()
+
+print cumsum_by_week.head()
+#weekly = g = df.groupby('A')
+
+#  group by year, then do cumsum by week
+
+#In [16]: g.cumsum()
+# do it for 2013 and for 2014
+
+# make a multiplier
+
+# apply the multiplier for the next 4 (or howerver many) weeks
