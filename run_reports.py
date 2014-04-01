@@ -26,11 +26,14 @@ Groveport.warnings()
 Ryerson.warnings()
 TotalDomestic.warnings()
 
+Ryerson.plot_dual("in_process_dollars", "ship_MA10_dollars")
+
 # ------------- Plot basic trend panels --------------
 
 #Gahanna.plot_stats()
 #Ashland.plot_stats()
 #Groveport.plot_stats()
+#Ryerson.plot_stats()
 
 # -------------- Plot basic summary stats ---------------
 Gahanna.summary()

@@ -22,34 +22,66 @@ test['week_num'] = test["date"].apply(lambda x: datetime.date.isocalendar(x)[1])
 test['week_day'] = test["date"].apply(lambda x: datetime.date.isocalendar(x)[2])
 
 
-# print test['week_num'].head()
-# print test['week_day'].head()
-#print test.groupby('week_num')['new_dollars'].aggregate(np.sum)
-#print test.groupby('week_day')['new_dollars'].aggregate(np.average)
-
 latest_iso_day = test.date.iget(-1)
-latest_iso_week = datetime.date.isocalendar(test.date.iget(-1))[1]
 
-print "latest day:", latest_iso_day
-print "latest week:", latest_iso_week
+# def generate_weekly_forecast(dataframe, statistic):
+# 	''' Generate a weekly forecast of the selected statistic using a simple YTD change from 2013 to
+# 	    the current year. This won't work for the first week of the year'''
+# 	latest_iso_week = datetime.date.isocalendar(dataframe.date.iget(-1))[1]
+# 	year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
 
-# cut down to current week only
+# 	# calculate cumulative statistic for YTD 2013
 
-ytd_2013_new_dollars = test[(test.week_num <= latest_iso_week - 1) & (test.year == 2013)].new_dollars.sum()
+# 	ytd_2013 = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == 2013)][statistic].sum()
 
-print "YTD 2013 new dollars:", ytd_2013_new_dollars
+# 	# calculate cumulative statistic for current year
 
-ytd_2014_new_dollars = test[(test.week_num <= latest_iso_week - 1) & (test.year == 2014)].new_dollars.sum()
+# 	ytd_current = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == year)][statistic].sum()
 
-print "YTD 2014 new dollars:", ytd_2014_new_dollars
 
-growth = float(ytd_2014_new_dollars) / ytd_2013_new_dollars
+# 	growth = float(ytd_current) / ytd_2013
 
-print growth
+# 	# aggregate base data by week
 
-# annual_groups = test_through_current_week.groupby('year')
+# 	weekly_2013 = self.df[(self.df.year == 2013)].groupby('week_num')[statistic].aggregate(np.sum)
 
-# # calculate weekly cumulative for each annual group
+# 	# generate forecast
+
+# 	forecast = weekly_2013.apply(lambda x: x * growth)
+
+# 	return forecast
+
+
+# plot multiple stats ytd against each other
+
+# aggregate data by week into new data frame, index by week in a dataframe
+
+# weekly['2013_new'] = pd.Dataframe(test[(test.year == 2013)].groupby('week_num')['new_dollars'].aggregate(np.sum))
+# weekly['2014_new'] = test[(test.year == 2014)].groupby('week_num')['new_dollars'].aggregate(np.sum)
+
+# cum_ytd_2013_new_dollars = test[(test.year == 2013)].new_dollars.cumsum()
+# cum_ytd_2014_new_dollars = test[(test.year == 2014)].new_dollars.cumsum()
+
+# cum_ytd_2013_new_dollars.plot()
+# cum_ytd_2014_new_dollars.plot()
+# plt.legend()
+# plt.show()
+
+
+
+weekly_groups = test.groupby(['year','week_num'])
+
+grouped = weekly_groups.new_dollars.aggregate(np.sum)
+print grouped
+
+
+
+
+
+
+
+
+# calculate daily cumulative for each annual group and plot
 
 # for name, annual_group in annual_groups:
 # 	annual_weekly = annual_group.groupby('week_num')['new_dollars'].aggregate(np.sum)

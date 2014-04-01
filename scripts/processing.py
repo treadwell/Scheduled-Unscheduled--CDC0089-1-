@@ -254,6 +254,33 @@ class Facility(object):
         print "\tDollars per order:", self.df['dollars_per_order'].iget(-1)
         print "summary statistics for", self.name, "complete.\n"
 
+    def generate_weekly_forecast(self, statistic):
+        ''' Generate a weekly forecast of the selected statistic using a simple YTD change from 2013 to
+            the current year. This won't work for the first week of the year'''
+        latest_iso_week = datetime.date.isocalendar(self.df.date.iget(-1))[1]
+        year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
+
+        # calculate cumulative statistic for YTD 2013
+
+        ytd_2013 = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == 2013)][statistic].sum()
+
+        # calculate cumulative statistic for current year
+
+        ytd_current = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == year)][statistic].sum()
+
+
+        growth = float(ytd_current) / ytd_2013
+
+        # aggregate base data by week
+
+        weekly_2013 = self.df[(self.df.year == 2013)].groupby('week_num')[statistic].aggregate(np.sum)
+
+        # generate forecast
+
+        forecast = weekly_2013.apply(lambda x: x * growth)
+
+        return forecast    
+
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
@@ -303,47 +330,9 @@ if __name__ == '__main__':
 
     g = Gahanna.df
 
-    Gahanna.plot_trend("new_orders")
-    Gahanna.plot_stats()
+   
 
-    weekday_groups = g.groupby(g.week_day)
-
-    for name, group in weekday_groups:
-        #group.new_dollars.plot()
-        #plt.plot(group.new_dollars, label = name)
-        group.smooth = pd.rolling_mean(group.new_dollars, window = 10)
-        plt.plot(group.smooth, label = 'rolling({k})'.format(k=name))
-
-    plt.legend(loc = "best")
-    plt.show()
-
-    ### version 2
-    # grouped = g.groupby(g.week_day)
-
-    # for name, group in grouped:
-    #     group.new_dollars.plot()
-        
-
-    #plt.legend()
-    # plt.show()
-
-    ### version 3
-    grouped = g.groupby(g.week_day)
-
-    L = len(grouped)
-    height = 2
-    length = (L+1)//2
-    
-    for i, (name, group) in enumerate(grouped):
-        plt.subplot(height*100 + length*10 + (i+1))
-        ## should probably be done as string concatenation
-        group.new_dollars.plot()
-        
-
-    # http://matplotlib.org/examples/pylab_examples/anscombe.html
-
-    #plt.legend()
-    plt.show()
+    print Gahanna.generate_weekly_forecast('new_dollars')
 
 
 

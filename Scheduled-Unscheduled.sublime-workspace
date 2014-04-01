@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"yt",
+				"ytd_2013_new_dollars"
+			],
+			[
+				"latest",
+				"latest_iso_week"
+			],
+			[
 				"cumsu",
 				"cumsum_by_week"
 			],
@@ -199,7 +207,7 @@
 			"file": "scripts/test_code_2.py",
 			"settings":
 			{
-				"buffer_size": 1996,
+				"buffer_size": 2303,
 				"line_ending": "Unix"
 			}
 		},
@@ -401,7 +409,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 11,
 			"sheets":
 			[
 				{
@@ -429,7 +437,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -517,7 +525,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -730,15 +738,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1996,
+						"buffer_size": 2303,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1087,
-								1087
+								1335,
+								1335
 							]
 						],
 						"settings":
@@ -746,10 +754,10 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 556.0,
+						"translation.y": 512.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
