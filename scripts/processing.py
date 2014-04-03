@@ -279,7 +279,37 @@ class Facility(object):
 
         forecast = weekly_2013.apply(lambda x: x * growth)
 
-        return forecast    
+        return forecast
+
+    def plot_ytd_comparison(self, statistic):
+        '''plots 2014 ytd versus full year 2013'''
+
+        # filter data by year
+        data_2013 = self.df[(self.df.year == 2013)]
+        data_2014 = self.df[(self.df.year == 2014)]
+
+        # accumulate weekly data
+        weekly_2013 = data_2013.groupby('week_num')[statistic].aggregate(np.sum)
+        weekly_2014 = data_2014.groupby('week_num')[statistic].aggregate(np.sum)
+
+        # combine weekly data from 2013 and 2014 into a single data frame
+        combined = pd.concat([weekly_2013, weekly_2014], axis=1)
+
+        combined.columns = ['2013', '2014'] # rename the columns (they're named the same)
+
+        # add cumsums
+        combined['cum_2013']=combined['2013'].cumsum()
+        combined['cum_2014']=combined['2014'].cumsum()
+
+        # trim data frame to only the cumulative columns
+        columns = ['cum_2013', 'cum_2014']
+        combined = combined[columns]
+
+        # plot
+        combined.plot()
+        plt.title("YTD " + statistic + " in " + self.name)
+        plt.ylabel('$000')
+        plt.show()  
 
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
@@ -333,6 +363,8 @@ if __name__ == '__main__':
    
 
     print Gahanna.generate_weekly_forecast('new_dollars')
+
+    Gahanna.plot_ytd_comparison('new_dollars')
 
 
 

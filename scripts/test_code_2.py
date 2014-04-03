@@ -67,12 +67,47 @@ latest_iso_day = test.date.iget(-1)
 # plt.legend()
 # plt.show()
 
+# split into years
+
+data_2013 = test[(test.year == 2013)]
+
+print data_2013.new_dollars.tail()
+
+weekly_2013 = data_2013.groupby('week_num')['new_dollars'].aggregate(np.sum)
+
+print weekly_2013.tail()
+
+data_2014 = test[(test.year == 2014)]
+
+weekly_2014 = data_2014.groupby('week_num')['new_dollars'].aggregate(np.sum)
+
+print weekly_2014.tail()
+
+combined = pd.concat([weekly_2013, weekly_2014], axis=1)
+
+combined.columns = ['2013', '2014']
+
+combined['cum_2013']=combined['2013'].cumsum()
+
+combined['cum_2014']=combined['2014'].cumsum()
+
+print combined.head(20)
+
+columns = ['cum_2013', 'cum_2014']
+
+combined = combined[columns]
+
+combined.plot()
+
+plt.show()
+
+
 
 
 weekly_groups = test.groupby(['year','week_num'])
 
 grouped = weekly_groups.new_dollars.aggregate(np.sum)
-print grouped
+#print grouped
 
 
 

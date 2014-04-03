@@ -27,6 +27,7 @@ Ryerson.warnings()
 TotalDomestic.warnings()
 
 Ryerson.plot_dual("in_process_dollars", "ship_MA10_dollars")
+Ryerson.plot_trend('ship_dollars')
 
 # ------------- Plot basic trend panels --------------
 
