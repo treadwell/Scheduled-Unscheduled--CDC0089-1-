@@ -311,6 +311,22 @@ class Facility(object):
         plt.ylabel('$000')
         plt.show()  
 
+        latest_iso_week = datetime.date.isocalendar(self.df.date.iget(-1))[1]
+        year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
+
+        # calculate cumulative statistic for YTD 2013
+
+        ytd_2013 = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == 2013)][statistic].sum()
+
+        # calculate cumulative statistic for current year
+
+        ytd_current = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == year)][statistic].sum()
+
+
+        growth = float(ytd_current) / ytd_2013
+
+        print "Growth vs prior year in", statistic,"at", self.name, ":", growth
+
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
     the missing data in the database.'''
@@ -355,16 +371,19 @@ if __name__ == '__main__':
 # ------------- Build Facility Objects --------------
     Gahanna = Facility("GAH", facility_data_db)
 
-    print Gahanna.df['week_day'].tail()
-    print Gahanna.df['day_of_year'].tail()
+    #print Gahanna.df['week_day'].tail()
+    #print Gahanna.df['day_of_year'].tail()
 
-    g = Gahanna.df
+    #g = Gahanna.df
 
    
 
-    print Gahanna.generate_weekly_forecast('new_dollars')
+    #print Gahanna.generate_weekly_forecast('new_dollars')
 
     Gahanna.plot_ytd_comparison('new_dollars')
+    Gahanna.plot_ytd_comparison('new_orders')
+    Gahanna.plot_ytd_comparison('new_units')
+    Gahanna.plot_ytd_comparison('new_lines')
 
 
 
