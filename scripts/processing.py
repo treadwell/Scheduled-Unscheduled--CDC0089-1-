@@ -242,16 +242,16 @@ class Facility(object):
     def summary(self):
         '''prints common summary statistics'''
         print "running summary statistics for", self.name, self.df['date'].iget(-1), "..."
-        print "\tNew dollars:", self.df.new_dollars.iget(-1)
+        print "\tNew dollars ($m):", self.df.new_dollars.iget(-1)
         print "\tNew orders:", self.df.new_orders.iget(-1)
         print "\tNew lines:", self.df.new_lines.iget(-1)
         print "\tNew units:", self.df.new_units.iget(-1)
         
 
-        print "\tUnits per line:", self.df['units_per_line'].iget(-1)
-        print "\tLines per order:", self.df['lines_per_order'].iget(-1)
-        print "\tDollars per unit:", self.df['dollars_per_unit'].iget(-1)
-        print "\tDollars per order:", self.df['dollars_per_order'].iget(-1)
+        print "\tUnits per line:", "{:4.1f}".format(self.df['units_per_line'].iget(-1))
+        print "\tLines per order:", "{:4.1f}".format(self.df['lines_per_order'].iget(-1))
+        print "\tDollars per unit:", "{:4.1f}".format(self.df['dollars_per_unit'].iget(-1))
+        print "\tDollars per order:", "{:6,.2f}".format(self.df['dollars_per_order'].iget(-1))
         print "summary statistics for", self.name, "complete.\n"
 
     def generate_weekly_forecast(self, statistic):
