@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"backl",
+				"backlog"
+			],
+			[
+				"in_proc",
+				"in_process_dollars"
+			],
+			[
+				"ship_ma",
+				"ship_MA10_dollars"
+			],
+			[
+				"hold",
+				"hold_dollars"
+			],
+			[
+				"fut",
+				"fut_dollars"
+			],
+			[
+				"unsche",
+				"unsched_dollars"
+			],
+			[
 				"week",
 				"week_num"
 			],
@@ -123,7 +147,7 @@
 			"file": "run_reports.py",
 			"settings":
 			{
-				"buffer_size": 1126,
+				"buffer_size": 1937,
 				"line_ending": "Unix"
 			}
 		},
@@ -195,7 +219,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 17929,
+				"buffer_size": 16694,
 				"line_ending": "Unix"
 			}
 		},
@@ -340,6 +364,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"dollars",
 			"weekday",
 			"incr_db_update_1",
 			"fac_to_db_1",
@@ -371,11 +396,14 @@
 			"notebook_di"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"orders",
+			"units",
+			"lines",
 			"incr_db_update",
 			"fac_to_db",
 			"count_db_records",
@@ -430,15 +458,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1126,
+						"buffer_size": 1937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								72,
-								72
+								1903,
+								1903
 							]
 						],
 						"settings":
@@ -446,7 +474,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 67.0,
+						"translation.y": 88.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -692,15 +720,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17929,
+						"buffer_size": 16694,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10108,
-								10108
+								16688,
+								16506
 							]
 						],
 						"settings":
@@ -710,7 +738,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2936.0,
+						"translation.y": 2939.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
