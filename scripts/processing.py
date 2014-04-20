@@ -272,50 +272,35 @@ class Facility(object):
         return forecast
 
     def plot_ytd_comparison(self, statistic):
-        '''plots 2014 ytd versus full year 2013'''
+        '''plots current year ytd versus full year prior year'''
 
-        # filter data by year
-        data_2013 = self.df[(self.df.year == 2013)]
-        data_2014 = self.df[(self.df.year == 2014)]
+        current_year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
+        latest_iso_week = datetime.date.isocalendar(self.df.date.iget(-1))[1]
 
-        # accumulate weekly data
-        weekly_2013 = data_2013.groupby('week_num')[statistic].aggregate(np.sum)
-        weekly_2014 = data_2014.groupby('week_num')[statistic].aggregate(np.sum)
+        daily = [self.df[(self.df.year == y)] for y in [current_year - 1, current_year]] # build list of 2 df's filtered by year
+        weekly = [d.groupby('week_num')[statistic].aggregate(np.sum) for d in daily] # accumulate weekly data for each
+        combined = pd. concat(weekly, axis=1) # combines the list items into a single data frame
+        combined.columns = ['2013', '2014'] # renames the columns (they're named the same)
 
-        # combine weekly data from 2013 and 2014 into a single data frame
-        combined = pd.concat([weekly_2013, weekly_2014], axis=1)
+        # add cumsums and delete base year columns
+        remaining_cols = []
+        for col in [column for column in combined]:  # iterates over column names to add cumsums
+             combined['cum_' + col] = combined[col].cumsum()
+             remaining_cols.append('cum_' + col)
+        combined = combined[remaining_cols]
 
-        combined.columns = ['2013', '2014'] # rename the columns (they're named the same)
+        # print comparison statistics
 
-        # add cumsums
-        combined['cum_2013']=combined['2013'].cumsum()
-        combined['cum_2014']=combined['2014'].cumsum()
-
-        # trim data frame to only the cumulative columns
-        columns = ['cum_2013', 'cum_2014']
-        combined = combined[columns]
-
+        latest_full_week = combined.ix[latest_iso_week-1]  #  current week usually isn't comparable. Take prior week.
+        growth = latest_full_week[1]/ latest_full_week[0]
+        print "Growth vs prior year in", statistic,"at", self.name, ":", "{:.1%}".format(growth)
+        
         # plot
         combined.plot()
         plt.title("YTD " + statistic + " in " + self.name)
         plt.ylabel('$000')
         plt.show()  
 
-        latest_iso_week = datetime.date.isocalendar(self.df.date.iget(-1))[1]
-        year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
-
-        # calculate cumulative statistic for YTD 2013
-
-        ytd_2013 = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == 2013)][statistic].sum()
-
-        # calculate cumulative statistic for current year
-
-        ytd_current = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == year)][statistic].sum()
-
-
-        growth = float(ytd_current) / ytd_2013
-
-        print "Growth vs prior year in", statistic,"at", self.name, ":", growth
 
 def incr_db_update():
     '''Compares records in a database with data available from a directory and updates
@@ -370,10 +355,10 @@ if __name__ == '__main__':
 
     #print Gahanna.generate_weekly_forecast('new_dollars')
 
-    Gahanna.plot_ytd_comparison('new_dollars')
-    Gahanna.plot_ytd_comparison('new_orders')
+    #Gahanna.plot_ytd_comparison('new_dollars')
+    #Gahanna.plot_ytd_comparison('new_orders')
     Gahanna.plot_ytd_comparison('new_units')
-    Gahanna.plot_ytd_comparison('new_lines')
+    #Gahanna.plot_ytd_comparison('new_lines')
 
 
 
