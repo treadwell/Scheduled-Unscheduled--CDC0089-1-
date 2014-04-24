@@ -205,8 +205,7 @@ class Facility(object):
         # Backlogs
         print "running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
         for order_type in ['dollars', 'lines', 'units', 'orders']:
-            backlog = 'backlog_' + order_type
-            in_process = 'in_process_' + order_type
+            #backlog = 'backlog_' + order_type
             new = 'new_' + order_type
             old = 'old_' + order_type
             sched = 'sched_' + order_type
@@ -215,10 +214,11 @@ class Facility(object):
             hold = 'hold_' + order_type
             ship_MA10 = 'ship_' + order_type
             in_process = 'in_process_' + order_type
-            if self.df[backlog].iget(-1) > 3:
-                print "\t", self.name, backlog, " > 3 days (", "{:4.2f}".format(self.df[backlog].iget(-1)), "):"
+            backlog = self.df[in_process].iget(-1) / float(self.df[ship_MA10].iget(-1))
+            if backlog > 3:
+                print "\t", self.name, order_type, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
                 print "\t\tNew:", self.df[new].iget(-1), "{:10.2f}".format(self.df[new].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\tIn process:", self.df[in_process].iget(-1)
+                print "\t\tIn process:", self.df[in_process].iget(-1), "{:10.2f}".format(self.df[in_process].iget(-1) / float(self.df[ship_MA10].iget(-1)))
                 print "\t\t\tOld:", self.df[old].iget(-1), "{:10.2f}".format(self.df[old].iget(-1) / float(self.df[ship_MA10].iget(-1)))
                 print "\t\t\tSched:", self.df[sched].iget(-1), "{:10.2f}".format(self.df[sched].iget(-1) / float(self.df[ship_MA10].iget(-1)))
                 print "\t\t\tUnsched:", self.df[unsched].iget(-1), "{:10.2f}".format(self.df[unsched].iget(-1) / float(self.df[ship_MA10].iget(-1)))
@@ -245,29 +245,30 @@ class Facility(object):
         print "summary statistics for", self.name, "complete.\n"
 
     def generate_weekly_forecast(self, statistic):
-        ''' Generate a weekly forecast of the selected statistic using a simple YTD change from 2013 to
+        ''' Generate a weekly forecast of the selected statistic using a simple YTD change from prior year to
             the current year. This won't work for the first week of the year'''
+
+        current_year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
         latest_iso_week = datetime.date.isocalendar(self.df.date.iget(-1))[1]
-        year = datetime.date.isocalendar(self.df.date.iget(-1))[0]
-
-        # calculate cumulative statistic for YTD 2013
-
-        ytd_2013 = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == 2013)][statistic].sum()
-
-        # calculate cumulative statistic for current year
-
-        ytd_current = self.df[(self.df.week_num < latest_iso_week) & (self.df.year == year)][statistic].sum()
+        latest_full_week = max(1, latest_iso_week-1)
 
 
-        growth = float(ytd_current) / ytd_2013
+        # calculate YTD sum of target statistic for prior and current year
 
-        # aggregate base data by week
+        YTD_sums = [self.df[(self.df.year == y) & (self.df.week_num < latest_full_week)][statistic].sum() for y in [current_year - 1, current_year]]
 
-        weekly_2013 = self.df[(self.df.year == 2013)].groupby('week_num')[statistic].aggregate(np.sum)
 
-        # generate forecast
+        growth = YTD_sums[1]/ float(YTD_sums[0])  # growth is the quotient of the two
 
-        forecast = weekly_2013.apply(lambda x: x * growth)
+        # aggregate prior year data by week
+
+        weekly_prior_year = self.df[(self.df.year == current_year-1)].groupby('week_num')[statistic].aggregate(np.sum)
+
+        # generate forecast (this should really only be for current week forward)
+
+        forecast = weekly_prior_year.apply(lambda x: x * growth)
+
+        # generate plot of actual through current week - 1 and forecast for the rest of the year
 
         return forecast
 
@@ -351,7 +352,9 @@ if __name__ == '__main__':
 
     #g = Gahanna.df
 
-   
+    Gahanna.generate_weekly_forecast('new_dollars')
+
+    Gahanna.warnings()
 
     #print Gahanna.generate_weekly_forecast('new_dollars')
 
