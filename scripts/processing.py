@@ -207,12 +207,13 @@ class Facility(object):
         for order_type in ['dollars', 'lines', 'units', 'orders']:
             #backlog = 'backlog_' + order_type
             new = 'new_' + order_type
+            ship = 'ship_' + order_type
             old = 'old_' + order_type
             sched = 'sched_' + order_type
             unsched = 'unsched_' + order_type
             fut = 'fut_' + order_type
             hold = 'hold_' + order_type
-            ship_MA10 = 'ship_' + order_type
+            ship_MA10 = 'ship_MA10_' + order_type
             in_process = 'in_process_' + order_type
             backlog = self.df[in_process].iget(-1) / float(self.df[ship_MA10].iget(-1))
             if backlog > 3:
@@ -226,8 +227,37 @@ class Facility(object):
                 print "\t\t\tHold:", self.df[hold].iget(-1), "{:10.2f}".format(self.df[hold].iget(-1) / float(self.df[ship_MA10].iget(-1)))
                 print "\t\tMA shipping:", self.df[ship_MA10].iget(-1)
                 self.plot_dual(in_process, ship_MA10)
+                print ship, ship_MA10
+                self.plot_dual(ship, ship_MA10)
 
         print "backlog warnings for", self.name, "complete.\n"
+
+    def warnings_new(self):
+        '''identifies potential warning conditions'''
+        # Backlogs
+        print "Running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
+        current_stats = {}
+        for unit_type in ['dollars', 'lines', 'units', 'orders']:
+            for statistic_type in ['new', 'ship', 'old', 'sched', 'unsched', 'fut', 'hold', 'in_process', 'ship_MA10']:
+                statistic_name = statistic_type + '_' + unit_type
+                statistic_value = self.df[statistic_name].iget(-1)
+                current_stats[statistic_name] = statistic_value
+
+        for unit_type in ['dollars', 'lines', 'units', 'orders']:
+            backlog = current_stats['in_process_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])
+
+            if backlog > 3:
+                print "\t", self.name, unit_type, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
+                for statistic_type in [ 'in_process', 'unsched', 'old','fut', 'hold','new', 'ship', 'ship_MA10']:
+                    if statistic_type in ['in_process', 'unsched', 'old','fut', 'hold']:
+                        pre = '\t\t'
+                    else:
+                        pre = '\t'
+                    print pre, statistic_type, ":", "{:4.2f}".format(current_stats[statistic_type + '_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])), \
+                    "days and", "{:6,.0f}".format(current_stats[statistic_type + '_' + unit_type]), unit_type
+                print "\n"
+
+        print "Backlog warnings for", self.name, "complete.\n"
 
     def summary(self):
         '''prints common summary statistics'''
@@ -347,7 +377,6 @@ if __name__ == '__main__':
 # ------------- Build Facility Objects --------------
     Gahanna = Facility("GAH", facility_data_db)
 
-    #print Gahanna.df['week_day'].tail()
     #print Gahanna.df['day_of_year'].tail()
 
     #g = Gahanna.df
@@ -355,6 +384,9 @@ if __name__ == '__main__':
     Gahanna.generate_weekly_forecast('new_dollars')
 
     Gahanna.warnings()
+
+    Groveport = Facility("GRO", facility_data_db)
+    Groveport.warnings_new()
 
     #print Gahanna.generate_weekly_forecast('new_dollars')
 

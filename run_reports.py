@@ -20,14 +20,14 @@ TotalDomestic = p.Facility("TOT", facility_data_db)
 
 # ------------- Print warnings --------------
 
-Gahanna.warnings()
-Ashland.warnings()
-Groveport.warnings()
-Ryerson.warnings()
-TotalDomestic.warnings()
+Gahanna.warnings_new()
+Ashland.warnings_new()
+Groveport.warnings_new()
+Ryerson.warnings_new()
+TotalDomestic.warnings_new()
 
-Ryerson.plot_dual("in_process_dollars", "ship_MA10_dollars")
-Ryerson.plot_trend('ship_dollars')
+#Ryerson.plot_dual("in_process_dollars", "ship_MA10_dollars")
+#Ryerson.plot_trend('ship_dollars')
 
 # ------------- Plot basic trend panels --------------
 
