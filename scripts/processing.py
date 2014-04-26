@@ -203,38 +203,6 @@ class Facility(object):
     def warnings(self):
         '''identifies potential warning conditions'''
         # Backlogs
-        print "running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
-        for order_type in ['dollars', 'lines', 'units', 'orders']:
-            #backlog = 'backlog_' + order_type
-            new = 'new_' + order_type
-            ship = 'ship_' + order_type
-            old = 'old_' + order_type
-            sched = 'sched_' + order_type
-            unsched = 'unsched_' + order_type
-            fut = 'fut_' + order_type
-            hold = 'hold_' + order_type
-            ship_MA10 = 'ship_MA10_' + order_type
-            in_process = 'in_process_' + order_type
-            backlog = self.df[in_process].iget(-1) / float(self.df[ship_MA10].iget(-1))
-            if backlog > 3:
-                print "\t", self.name, order_type, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
-                print "\t\tNew:", self.df[new].iget(-1), "{:10.2f}".format(self.df[new].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\tIn process:", self.df[in_process].iget(-1), "{:10.2f}".format(self.df[in_process].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\t\tOld:", self.df[old].iget(-1), "{:10.2f}".format(self.df[old].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\t\tSched:", self.df[sched].iget(-1), "{:10.2f}".format(self.df[sched].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\t\tUnsched:", self.df[unsched].iget(-1), "{:10.2f}".format(self.df[unsched].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\t\tFuture:", self.df[fut].iget(-1), "{:10.2f}".format(self.df[fut].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\t\tHold:", self.df[hold].iget(-1), "{:10.2f}".format(self.df[hold].iget(-1) / float(self.df[ship_MA10].iget(-1)))
-                print "\t\tMA shipping:", self.df[ship_MA10].iget(-1)
-                self.plot_dual(in_process, ship_MA10)
-                print ship, ship_MA10
-                self.plot_dual(ship, ship_MA10)
-
-        print "backlog warnings for", self.name, "complete.\n"
-
-    def warnings_new(self):
-        '''identifies potential warning conditions'''
-        # Backlogs
         print "Running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
         current_stats = {}
         for unit_type in ['dollars', 'lines', 'units', 'orders']:
@@ -257,22 +225,25 @@ class Facility(object):
                     "days and", "{:6,.0f}".format(current_stats[statistic_type + '_' + unit_type]), unit_type
                 print "\n"
 
-        print "Backlog warnings for", self.name, "complete.\n"
+        print "...backlog warnings for", self.name, "complete.\n"
 
     def summary(self):
         '''prints common summary statistics'''
-        print "running summary statistics for", self.name, self.df['date'].iget(-1), "..."
-        print "\tNew dollars ($m):", self.df.new_dollars.iget(-1)
-        print "\tNew orders:", self.df.new_orders.iget(-1)
-        print "\tNew lines:", self.df.new_lines.iget(-1)
-        print "\tNew units:", self.df.new_units.iget(-1)
-        
+        print "Running summary statistics for", self.name, self.df['date'].iget(-1), "..."
 
-        print "\tUnits per line:", "{:4.1f}".format(self.df['units_per_line'].iget(-1))
-        print "\tLines per order:", "{:4.1f}".format(self.df['lines_per_order'].iget(-1))
-        print "\tDollars per unit:", "{:4.1f}".format(self.df['dollars_per_unit'].iget(-1))
-        print "\tDollars per order:", "{:6,.2f}".format(self.df['dollars_per_order'].iget(-1))
-        print "summary statistics for", self.name, "complete.\n"
+        for statistic in ['new_dollars', 'new_orders', 'new_lines', 'new_units', 'units_per_line', 'lines_per_order', 'dollars_per_unit', 'dollars_per_order']:
+            if statistic in ['new_dollars', 'new_orders', 'new_lines', 'new_units']:
+                format_string = "{:6,.0f}"
+            else:
+                format_string = "{:4.1f}"
+            split_statistic = statistic.split('_')
+            print_title = " ".join([split_statistic[0].title()] + split_statistic[1:])
+
+            if print_title == "New dollars":
+                print_title = print_title + ' ($m)'
+            print "\t", print_title+":", format_string.format(self.df[statistic].iget(-1))
+
+        print "...summary statistics for", self.name, "complete.\n"
 
     def generate_weekly_forecast(self, statistic):
         ''' Generate a weekly forecast of the selected statistic using a simple YTD change from prior year to
@@ -379,14 +350,14 @@ if __name__ == '__main__':
 
     #print Gahanna.df['day_of_year'].tail()
 
-    #g = Gahanna.df
+    Gahanna.summary()
 
     Gahanna.generate_weekly_forecast('new_dollars')
 
     Gahanna.warnings()
 
     Groveport = Facility("GRO", facility_data_db)
-    Groveport.warnings_new()
+    Groveport.warnings()
 
     #print Gahanna.generate_weekly_forecast('new_dollars')
 
