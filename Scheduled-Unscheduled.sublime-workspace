@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"split",
+				"split_statistic"
+			],
+			[
+				"doll",
+				"dollars_per_order"
+			],
+			[
+				"dollar",
+				"dollars_per_unit"
+			],
+			[
+				"lines",
+				"lines_per_order"
+			],
+			[
+				"units",
+				"units_per_line"
+			],
+			[
+				"new_",
+				"new_units"
+			],
+			[
 				"statistic",
 				"statistic_value"
 			],
@@ -26,10 +50,6 @@
 			[
 				"curr",
 				"current_year-1"
-			],
-			[
-				"new_",
-				"new_dollars"
 			],
 			[
 				"curre",
@@ -171,7 +191,7 @@
 			"file": "run_reports.py",
 			"settings":
 			{
-				"buffer_size": 1959,
+				"buffer_size": 1939,
 				"line_ending": "Unix"
 			}
 		},
@@ -243,7 +263,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 18618,
+				"buffer_size": 16501,
 				"line_ending": "Unix"
 			}
 		},
@@ -482,15 +502,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1959,
+						"buffer_size": 1939,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1590,
-								1590
+								723,
+								723
 							]
 						],
 						"settings":
@@ -744,15 +764,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18618,
+						"buffer_size": 16501,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12918,
-								12918
+								11982,
+								11982
 							]
 						],
 						"settings":
@@ -762,7 +782,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3527.0,
+						"translation.y": 1917.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -920,7 +940,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 231.0
+		"height": 383.0
 	},
 	"output.find_results":
 	{

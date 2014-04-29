@@ -22,6 +22,7 @@ TotalDomestic = p.Facility("TOT", facility_data_db)
 
 Gahanna.warnings()
 Ashland.warnings()
+Ashland.plot_trend('in_process_dollars')
 Groveport.warnings()
 Ryerson.warnings()
 TotalDomestic.warnings()

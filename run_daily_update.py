@@ -6,10 +6,10 @@ import scripts.db_maintenance as db_m
 
 path_to_db = "./db/"
 
-print "Pre-update records"
+print "Count of records before the update"
 print db_m.count_db_records(path_to_db)
 
 p.incr_db_update()
 
-print "Post-update records"
+print "Count of records after the update"
 print db_m.count_db_records(path_to_db)

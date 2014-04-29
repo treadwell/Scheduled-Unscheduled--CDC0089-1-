@@ -216,14 +216,16 @@ class Facility(object):
 
             if backlog > 3:
                 print "\t", self.name, unit_type, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
-                for statistic_type in [ 'in_process', 'unsched', 'old','fut', 'hold','new', 'ship', 'ship_MA10']:
-                    if statistic_type in ['in_process', 'unsched', 'old','fut', 'hold']:
-                        pre = '\t\t'
+                for statistic_type in [ 'in_process', 'sched','unsched', 'old','fut', 'hold','new', 'ship', 'ship_MA10']:
+                    if statistic_type in ['sched', 'unsched', 'old','fut', 'hold']:
+                        pre = '\t\t\t'
                     else:
-                        pre = '\t'
+                        pre = '\t\t'
                     print pre, statistic_type, ":", "{:4.2f}".format(current_stats[statistic_type + '_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])), \
                     "days and", "{:6,.0f}".format(current_stats[statistic_type + '_' + unit_type]), unit_type
                 print "\n"
+                self.plot_trend('in_process' + '_' + unit_type)
+
 
         print "...backlog warnings for", self.name, "complete.\n"
 
@@ -358,6 +360,9 @@ if __name__ == '__main__':
 
     Groveport = Facility("GRO", facility_data_db)
     Groveport.warnings()
+
+    Ashland = Facility("ASH", facility_data_db)
+    Ashland.warnings()
 
     #print Gahanna.generate_weekly_forecast('new_dollars')
 
