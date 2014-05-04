@@ -205,40 +205,27 @@ class Facility(object):
         # Backlogs
         latest_date = self.df['date'].iget(-1)
         print "Running backlog warnings for", self.name, latest_date, "..."
-        current_stats = {}
 
         unit_types = ['dollars', 'lines', 'units', 'orders'] # should be global 
         statistic_types = ['new', 'ship', 'old', 'sched', 'unsched', 'fut', 'hold', 'in_process', 'ship_MA10']
         in_process_comps = ['sched', 'unsched', 'old','fut', 'hold']
         name = lambda s, u: '_'.join([s, u]) # don't do this, make this a function
 
-        def current_stats_fn(x):
-            return self.df[x].iget(-1) 
+        def current_stats(s, u):
             ## can use this fn to avoid the dictionary
+            return self.df[name(s, u)].iget(-1) 
 
-        def current_stats_fn_2(s, u):
-            ## if making sure you're not out of bounds on s, u is important
-            if not (s in statistic_types and u in unit_types):
-                raise ValueError("got wrong values of s, u: %s, %s" %(s, u))
-            return self.df[x].iget(-1) 
-
-            
-        for u in unit_types: # for u in, or for unit in..
-            for s in statistic_types:
-                current_stats[name(s, u)] = self.df[name(s, u)].iget(-1) # maybe a way to transform self.df directly
-
-        current_stats_2 = {(name(s, u): self.df[name(s, u)].iget(-1) for s in statistic_types) for u in unit_types} # exercise: get this to work
         for u in unit_types:
-            in_p = name('in_process', u)
-            ship = name('ship_MA10', u)
-            backlog = current_stats[in_p] / float(current_stats[ship])
+            in_p = current_stats('in_process', u)
+            ship = current_stats('ship_MA10', u)
+            backlog = in_p / float(ship)
 
             if backlog > 3:
                 print "\t", self.name, u, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
                 for s in statistic_types:
                     pre = '\t\t' + ('\t' if s in in_process_comps else '')
-                    cur = current_stats[name(s, u)]
-                    print pre, s, ":", "{:4.2f}".format(cur/float(ship)),
+                    cur = current_stats(s, u)
+                    print pre, s, ":", "{:4.2f}".format(cur / float(ship)),
                     "days and", "{:6,.0f}".format(cur), u
                 print "\n"
                 self.plot_trend(in_p)
