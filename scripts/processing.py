@@ -203,28 +203,45 @@ class Facility(object):
     def warnings(self):
         '''identifies potential warning conditions'''
         # Backlogs
-        print "Running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
+        latest_date = self.df['date'].iget(-1)
+        print "Running backlog warnings for", self.name, latest_date, "..."
         current_stats = {}
-        for unit_type in ['dollars', 'lines', 'units', 'orders']:
-            for statistic_type in ['new', 'ship', 'old', 'sched', 'unsched', 'fut', 'hold', 'in_process', 'ship_MA10']:
-                statistic_name = statistic_type + '_' + unit_type
-                statistic_value = self.df[statistic_name].iget(-1)
-                current_stats[statistic_name] = statistic_value
 
-        for unit_type in ['dollars', 'lines', 'units', 'orders']:
-            backlog = current_stats['in_process_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])
+        unit_types = ['dollars', 'lines', 'units', 'orders'] # should be global 
+        statistic_types = ['new', 'ship', 'old', 'sched', 'unsched', 'fut', 'hold', 'in_process', 'ship_MA10']
+        in_process_comps = ['sched', 'unsched', 'old','fut', 'hold']
+        name = lambda s, u: '_'.join([s, u]) # don't do this, make this a function
+
+        def current_stats_fn(x):
+            return self.df[x].iget(-1) 
+            ## can use this fn to avoid the dictionary
+
+        def current_stats_fn_2(s, u):
+            ## if making sure you're not out of bounds on s, u is important
+            if not (s in statistic_types and u in unit_types):
+                raise ValueError("got wrong values of s, u: %s, %s" %(s, u))
+            return self.df[x].iget(-1) 
+
+            
+        for u in unit_types: # for u in, or for unit in..
+            for s in statistic_types:
+                current_stats[name(s, u)] = self.df[name(s, u)].iget(-1) # maybe a way to transform self.df directly
+
+        current_stats_2 = {(name(s, u): self.df[name(s, u)].iget(-1) for s in statistic_types) for u in unit_types} # exercise: get this to work
+        for u in unit_types:
+            in_p = name('in_process', u)
+            ship = name('ship_MA10', u)
+            backlog = current_stats[in_p] / float(current_stats[ship])
 
             if backlog > 3:
-                print "\t", self.name, unit_type, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
-                for statistic_type in [ 'in_process', 'sched','unsched', 'old','fut', 'hold','new', 'ship', 'ship_MA10']:
-                    if statistic_type in ['sched', 'unsched', 'old','fut', 'hold']:
-                        pre = '\t\t\t'
-                    else:
-                        pre = '\t\t'
-                    print pre, statistic_type, ":", "{:4.2f}".format(current_stats[statistic_type + '_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])), \
-                    "days and", "{:6,.0f}".format(current_stats[statistic_type + '_' + unit_type]), unit_type
+                print "\t", self.name, u, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
+                for s in statistic_types:
+                    pre = '\t\t' + ('\t' if s in in_process_comps else '')
+                    cur = current_stats[name(s, u)]
+                    print pre, s, ":", "{:4.2f}".format(cur/float(ship)),
+                    "days and", "{:6,.0f}".format(cur), u
                 print "\n"
-                self.plot_trend('in_process' + '_' + unit_type)
+                self.plot_trend(in_p)
 
 
         print "...backlog warnings for", self.name, "complete.\n"
