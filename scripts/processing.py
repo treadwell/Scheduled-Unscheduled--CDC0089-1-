@@ -8,6 +8,17 @@ import datetime
 
 ### Processing Layer ###
 
+# Globals
+unit_types = ['dollars', 'lines', 'units', 'orders']
+statistic_types = ['new', 'ship', 'old', 'sched', 'unsched', 'fut', 'hold', 'in_process', 'ship_MA10']
+in_process_components = ['sched', 'unsched', 'old','fut', 'hold']
+
+def name(u, s):
+    if u not in unit_types or s not in statistic_types:
+        raise ValueError("invalid statistic")
+    return "_".join([s,u])
+
+
 class Daily_Prodn(object):
     def __init__(self, date, location, new_orders, new_lines, new_units, new_dollars,    
                sched_orders, sched_lines, sched_units, sched_dollars,  
@@ -201,30 +212,35 @@ class Facility(object):
         plt.show()
 
     def warnings(self):
-        '''identifies potential warning conditions'''
-        # Backlogs
-        print "Running backlog warnings for", self.name, self.df['date'].iget(-1), "..."
-        current_stats = {}
-        for unit_type in ['dollars', 'lines', 'units', 'orders']:
-            for statistic_type in ['new', 'ship', 'old', 'sched', 'unsched', 'fut', 'hold', 'in_process', 'ship_MA10']:
-                statistic_name = statistic_type + '_' + unit_type
-                statistic_value = self.df[statistic_name].iget(-1)
-                current_stats[statistic_name] = statistic_value
+        '''identifies potential warning conditions including excessive backlogs, etc.'''
+        
+        latest_date = self.df['date'].iget(-1)
 
-        for unit_type in ['dollars', 'lines', 'units', 'orders']:
-            backlog = current_stats['in_process_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])
+        def value(u, s):
+            if u not in unit_types or s not in statistic_types:
+                raise ValueError("invalid statistic")
+            return self.df[name(u,s)].iget(-1)
+        
+        # Backlogs
+        print "Running backlog warnings for", self.name, latest_date, "..."
+
+        for u in unit_types:
+            in_p = value(u, 'in_process')
+            avg_shipping = value(u, 'ship_MA10')
+            backlog = in_p / float(avg_shipping)
 
             if backlog > 3:
-                print "\t", self.name, unit_type, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
-                for statistic_type in [ 'in_process', 'sched','unsched', 'old','fut', 'hold','new', 'ship', 'ship_MA10']:
-                    if statistic_type in ['sched', 'unsched', 'old','fut', 'hold']:
-                        pre = '\t\t\t'
-                    else:
-                        pre = '\t\t'
-                    print pre, statistic_type, ":", "{:4.2f}".format(current_stats[statistic_type + '_' + unit_type] / float(current_stats['ship_MA10_' + unit_type])), \
-                    "days and", "{:6,.0f}".format(current_stats[statistic_type + '_' + unit_type]), unit_type
+                print "\t", self.name, u, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
+                
+                for s in statistic_types:
+                    pre = '\t\t'
+                    if s in in_process_components:
+                        pre += '\t'
+                        
+                    print pre, s, ":", "{:4.2f}".format(value(u,s) / float(avg_shipping)), \
+                    "days and", "{:6,.0f}".format(value(u,s)), u
                 print "\n"
-                self.plot_trend('in_process' + '_' + unit_type)
+                self.plot_trend(name(u, 'in_process'))
 
 
         print "...backlog warnings for", self.name, "complete.\n"
