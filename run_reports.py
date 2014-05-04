@@ -65,3 +65,8 @@ Ryerson.plot_ytd_comparison('new_dollars')
 Ryerson.plot_ytd_comparison('new_orders')
 Ryerson.plot_ytd_comparison('new_lines')
 Ryerson.plot_ytd_comparison('new_units')
+print "-----------------"
+TotalDomestic.plot_ytd_comparison('new_dollars')
+TotalDomestic.plot_ytd_comparison('new_orders')
+TotalDomestic.plot_ytd_comparison('new_lines')
+TotalDomestic.plot_ytd_comparison('new_units')
