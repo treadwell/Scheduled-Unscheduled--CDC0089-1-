@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"statis",
+				"statistic_types"
+			],
+			[
+				"latest",
+				"latest_date"
+			],
+			[
+				"statistic",
+				"statistic_types"
+			],
+			[
+				"in_p",
+				"in_process_dollars"
+			],
+			[
 				"split",
 				"split_statistic"
 			],
@@ -26,10 +42,6 @@
 			[
 				"new_",
 				"new_units"
-			],
-			[
-				"statistic",
-				"statistic_value"
 			],
 			[
 				"current",
@@ -88,10 +100,6 @@
 				"ytd_2013_new_dollars"
 			],
 			[
-				"latest",
-				"latest_iso_week"
-			],
-			[
 				"cumsu",
 				"cumsum_by_week"
 			],
@@ -110,10 +118,6 @@
 			[
 				"stat",
 				"statistic2"
-			],
-			[
-				"statis",
-				"statistic1"
 			],
 			[
 				"in_process",
@@ -191,7 +195,7 @@
 			"file": "run_reports.py",
 			"settings":
 			{
-				"buffer_size": 1939,
+				"buffer_size": 2197,
 				"line_ending": "Unix"
 			}
 		},
@@ -215,7 +219,7 @@
 			"file": "run_daily_update.py",
 			"settings":
 			{
-				"buffer_size": 369,
+				"buffer_size": 399,
 				"line_ending": "Unix"
 			}
 		},
@@ -263,7 +267,7 @@
 			"file": "scripts/processing.py",
 			"settings":
 			{
-				"buffer_size": 16501,
+				"buffer_size": 16641,
 				"line_ending": "Unix"
 			}
 		},
@@ -502,15 +506,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1939,
+						"buffer_size": 2197,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								723,
-								723
+								2163,
+								2163
 							]
 						],
 						"settings":
@@ -590,15 +594,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 369,
+						"buffer_size": 399,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								369,
-								369
+								399,
+								399
 							]
 						],
 						"settings":
@@ -609,7 +613,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -764,15 +768,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16501,
+						"buffer_size": 16641,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11982,
-								11982
+								570,
+								426
 							]
 						],
 						"settings":
@@ -782,10 +786,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1917.0,
+						"translation.y": 3376.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -940,7 +944,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 383.0
+		"height": 238.0
 	},
 	"output.find_results":
 	{

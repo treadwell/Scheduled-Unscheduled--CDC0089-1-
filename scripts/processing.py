@@ -233,12 +233,10 @@ class Facility(object):
                 print "\t", self.name, u, "backlog > 3 days (", "{:4.2f}".format(backlog), "):"
                 
                 for s in statistic_types:
-                    pre = '\t\t'
-                    if s in in_process_components:
-                        pre += '\t'
-                        
-                    print pre, s, ":", "{:4.2f}".format(value(u,s) / float(avg_shipping)), \
-                    "days and", "{:6,.0f}".format(value(u,s)), u
+                    pre = '\t\t' + ('\t' if s in in_process_components else '')
+                    curr = value(u,s)
+                    print pre, s, ":", "{:4.2f}".format(curr / float(avg_shipping)), \
+                    "days and", "{:6,.0f}".format(curr), u
                 print "\n"
                 self.plot_trend(name(u, 'in_process'))
 
