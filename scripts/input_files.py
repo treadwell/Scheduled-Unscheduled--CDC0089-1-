@@ -152,7 +152,18 @@ def read_file(path, filename):
     else:
         e = 0
     f = file_data[('TOT',date)].new_orders
-    assert file_data[('TOT',date)].new_orders == a + b + c + e
+
+    try:
+        assert file_data[('TOT',date)].new_orders == a + b + c + e, "%s domestic total new orders don't match" % date
+    except AssertionError:
+        print "Assertion error: %s domestic total new orders don't match" % date
+        print "Debug report for", date
+        print "GAH new orders", a
+        print "ASH new orders", b
+        print "GRO new orders", c
+        print "Tot domestic new orders", f
+
+    #assert file_data[('TOT',date)].new_orders == a + b + c + e
 
     return file_data
 
