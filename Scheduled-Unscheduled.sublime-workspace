@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"sched",
+				"sched_units"
+			],
+			[
 				"Gah",
 				"Gahanna"
 			],
@@ -140,10 +144,6 @@
 				"props"
 			],
 			[
-				"sched",
-				"sched_dollars"
-			],
-			[
 				"statisti",
 				"statistic_data"
 			],
@@ -207,7 +207,7 @@
 			"file": "ad_hoc_queries.py",
 			"settings":
 			{
-				"buffer_size": 1762,
+				"buffer_size": 2648,
 				"line_ending": "Unix"
 			}
 		},
@@ -257,6 +257,10 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)"
+	],
 	"file_history":
 	[
 		"/Users/kbrooks/Documents/MH/Projects/Metrics/Distribution/Scheduled Unscheduled (CDC0089-1)/run_reports.py",
@@ -427,7 +431,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -466,15 +470,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1762,
+						"buffer_size": 2648,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								620,
-								620
+								2548,
+								2548
 							]
 						],
 						"settings":
@@ -482,10 +486,10 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 495.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -513,7 +517,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -541,7 +545,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -624,6 +628,7 @@
 		],
 		"width": 392.0
 	},
+	"selected_group": 0,
 	"settings":
 	{
 	},
