@@ -1,0 +1,207 @@
+CDC0089-1                                              MCGRAW-HILL EDUCATION                                      PAGE    :        1
+DAILY                                             DISTRIBUTION CENTER -   ALL                                     RUN DATE: 11/07/14
+SHIFT: 1                                                                                                          RUN TIME:    00:03
+                                                IMDS DAILY STATUS REPORT OF ORDERS
+
+                                       GAHANNA, OH                        ASHLAND, OH                        GROVEPORT, OH
+NEW ORDERS FROM:            ORDERS   LINES     UNITS  $(000)   ORDERS    LINES     UNITS  $(000)   ORDERS    LINES     UNITS  $(000)
+ ORACLE  2ND SHIFT          1,385    3,327    55,039    $598      169      922    22,485     $75      461    1,194     7,533    $125
+ ORACLE  1ST SHIFT            570    2,822    32,537    $958      259    1,237    78,944    $104      310    1,597   119,031    $147
+ ORACLE  RUSH                  19       42       318     $13       13       35       329      $2        8       15        25      $1
+                           _________________________________   _________________________________   _________________________________
+TOTAL NEW ORDERS            1,974    6,191    87,894  $1,569      441    2,194   101,758    $181      779    2,806   126,589    $273
+ 
+SCHEDULED ORDERS
+ 2ND SHIFT 11/07/14  A-H
+ 2ND SHIFT 11/07/14  I-P
+ 2ND SHIFT 11/07/14  Q-Z
+ 2ND SHIFT 11/07/14  0
+ 2ND SHIFT 11/07/14  1
+ 2ND SHIFT 11/07/14  2
+ 2ND SHIFT 11/07/14  3
+ 2ND SHIFT 11/07/14  4-9
+                           _________________________________   _________________________________   _________________________________
+TOTAL 2ND SHIFT
+ 
+ 1ST SHIFT 11/07/14  A-H       33      696   111,565     $11       75      554    38,039     $24       57      880    40,144      $1
+ 1ST SHIFT 11/07/14  I-P
+ 1ST SHIFT 11/07/14  Q-Z
+ 1ST SHIFT 11/07/14  0
+ 1ST SHIFT 11/07/14  1
+ 1ST SHIFT 11/07/14  2
+ 1ST SHIFT 11/07/14  3
+ 1ST SHIFT 11/07/14  4-9
+                           _________________________________   _________________________________   _________________________________
+TOTAL 1ST SHIFT                33      696   111,565     $11       75      554    38,039     $24       57      880    40,144      $1
+ 
+TOTAL SCHEDULED ORDERS         33      696   111,565     $11       75      554    38,039     $24       57      880    40,144      $1
+                           =================================   =================================   =================================
+UNSCHEDULED ORDERS
+ 1ST SHIFT 11/07/14  A-H                                           74      426    20,550      $0      706    2,431    13,666    $214
+ 1ST SHIFT 11/07/14  I-P       42      189     1,576     $49      208      899     4,202    $168        8       46       243      $1
+ 1ST SHIFT 11/07/14  Q-Z       46       85       132      $0        2        3       211      $0        5       23        23      $0
+ 1ST SHIFT 11/07/14  0
+ 1ST SHIFT 11/07/14  1         23      103     6,730     $38        1        1         1      $0
+ 1ST SHIFT 11/07/14  2
+ 1ST SHIFT 11/07/14  3
+ 1ST SHIFT 11/07/14  4-9    1,846    5,766    79,527  $1,479      100      433     6,234      $0      260    1,431   117,982    $127
+                           _________________________________   _________________________________   _________________________________
+ 
+TOTAL UNSCHEDULED ORDERS    1,957    6,143    87,965  $1,566      385    1,762    31,198    $168      979    3,931   131,914    $342
+                           =================================   =================================   =================================
+TOTALS INCLUDED ABOVE:
+ SINGLES (GESS)               566      566       566      $8       79       79        79      $7      252      252       252      $3
+ KILL CODE 2(SPACE)
+ KILL CODE 1(NO INV.)
+
+SHIPMENT CONFIRMATION
+ SHIPPED 2ND SHIFT
+ SHIPPED 1ST SHIFT          1,659    4,982    99,103  $2,284      454    2,648    72,951    $199      905    3,319    58,873    $299
+                           _________________________________   _________________________________   _________________________________
+TOTAL SHIPMENT CONFIRM      1,659    4,982    99,103  $2,284      454    2,648    72,951    $199      905    3,319    58,873    $299
+                           =================================   =================================   =================================
+ 
+SUSPENDED SHIPMENTS           488    3,341    30,825  $1,073       36    1,024   186,043     $16       34      525     2,264     $13
+ 
+OTHER ORDERS:
+ OLD INPROCESS (INP)          562    2,654    38,114  $1,307       31      106   152,819     $13       33      110       473     $13
+ FUTURE DATED                  23      113     2,881    $258       10       35     1,139     $28       14       51     1,471     $27
+ HOLDS / ERRORS                13      188    25,036      $6       34    1,063   565,247      $1       31      374   300,252      $1
+CDC0089-1                                              MCGRAW-HILL EDUCATION                                      PAGE    :        2
+DAILY                                             DISTRIBUTION CENTER -   ALL                                     RUN DATE: 11/07/14
+SHIFT: 1                                                                                                          RUN TIME:    00:03
+                                                IMDS DAILY STATUS REPORT OF ORDERS
+
+                                       RYERSON
+NEW ORDERS FROM:            ORDERS   LINES     UNITS  $(000)   ORDERS    LINES     UNITS  $(000)   ORDERS    LINES     UNITS  $(000)
+ ORACLE  2ND SHIFT
+ ORACLE  1ST SHIFT
+ ORACLE  RUSH
+                           _________________________________   _________________________________   _________________________________
+TOTAL NEW ORDERS
+ 
+SCHEDULED ORDERS
+ 2ND SHIFT 11/07/14  A-H
+ 2ND SHIFT 11/07/14  I-P
+ 2ND SHIFT 11/07/14  Q-Z
+ 2ND SHIFT 11/07/14  0
+ 2ND SHIFT 11/07/14  1
+ 2ND SHIFT 11/07/14  2
+ 2ND SHIFT 11/07/14  3
+ 2ND SHIFT 11/07/14  4-9
+                           _________________________________   _________________________________   _________________________________
+TOTAL 2ND SHIFT
+ 
+ 1ST SHIFT 11/07/14  A-H
+ 1ST SHIFT 11/07/14  I-P
+ 1ST SHIFT 11/07/14  Q-Z
+ 1ST SHIFT 11/07/14  0
+ 1ST SHIFT 11/07/14  1
+ 1ST SHIFT 11/07/14  2
+ 1ST SHIFT 11/07/14  3
+ 1ST SHIFT 11/07/14  4-9
+                           _________________________________   _________________________________   _________________________________
+TOTAL 1ST SHIFT
+ 
+TOTAL SCHEDULED ORDERS
+                           =================================   =================================   =================================
+UNSCHEDULED ORDERS
+ 1ST SHIFT 11/07/14  A-H
+ 1ST SHIFT 11/07/14  I-P
+ 1ST SHIFT 11/07/14  Q-Z
+ 1ST SHIFT 11/07/14  0
+ 1ST SHIFT 11/07/14  1
+ 1ST SHIFT 11/07/14  2
+ 1ST SHIFT 11/07/14  3
+ 1ST SHIFT 11/07/14  4-9
+                           _________________________________   _________________________________   _________________________________
+ 
+TOTAL UNSCHEDULED ORDERS
+                           =================================   =================================   =================================
+TOTALS INCLUDED ABOVE:
+ SINGLES (GESS)
+ KILL CODE 2(SPACE)
+ KILL CODE 1(NO INV.)
+
+SHIPMENT CONFIRMATION
+ SHIPPED 2ND SHIFT
+ SHIPPED 1ST SHIFT
+                           _________________________________   _________________________________   _________________________________
+TOTAL SHIPMENT CONFIRM
+                           =================================   =================================   =================================
+ 
+SUSPENDED SHIPMENTS
+ 
+OTHER ORDERS:
+ OLD INPROCESS (INP)
+ FUTURE DATED
+ HOLDS / ERRORS
+CDC0089-1                                              MCGRAW-HILL EDUCATION                                      PAGE    :        3
+DAILY                                             DISTRIBUTION CENTER -   ALL                                     RUN DATE: 11/07/14
+SHIFT: 1                                                                                                          RUN TIME:    00:03
+                                                IMDS DAILY STATUS REPORT OF ORDERS
+
+                                      GRAND TOTALS - DOMESTIC ONLY (EXCLUDES CANADIAN TOTALS)
+NEW ORDERS FROM:                ORDERS     LINES      UNITS   $(000)
+ ORACLE  2ND SHIFT               2,015     5,443     85,057     $798
+ ORACLE  1ST SHIFT               1,139     5,656    230,512   $1,209
+ ORACLE  RUSH                       40        92        672      $16
+                             _______________________________________
+TOTAL NEW ORDERS                 3,194    11,191    316,241   $2,023
+ 
+SCHEDULED ORDERS
+ 2ND SHIFT 11/07/14  A-H
+ 2ND SHIFT 11/07/14  I-P
+ 2ND SHIFT 11/07/14  Q-Z
+ 2ND SHIFT 11/07/14  0
+ 2ND SHIFT 11/07/14  1
+ 2ND SHIFT 11/07/14  2
+ 2ND SHIFT 11/07/14  3
+ 2ND SHIFT 11/07/14  4-9
+                             _______________________________________
+TOTAL 2ND SHIFT
+ 
+ 1ST SHIFT 11/07/14  A-H           165     2,130    189,748      $36
+ 1ST SHIFT 11/07/14  I-P
+ 1ST SHIFT 11/07/14  Q-Z
+ 1ST SHIFT 11/07/14  0
+ 1ST SHIFT 11/07/14  1
+ 1ST SHIFT 11/07/14  2
+ 1ST SHIFT 11/07/14  3
+ 1ST SHIFT 11/07/14  4-9
+                             _______________________________________
+TOTAL 1ST SHIFT                    165     2,130    189,748      $36
+ 
+TOTAL SCHEDULED ORDERS             165     2,130    189,748      $36
+                             =======================================
+UNSCHEDULED ORDERS
+ 1ST SHIFT 11/07/14  A-H           780     2,857     34,216     $214
+ 1ST SHIFT 11/07/14  I-P           258     1,134      6,021     $218
+ 1ST SHIFT 11/07/14  Q-Z            53       111        366       $0
+ 1ST SHIFT 11/07/14  0
+ 1ST SHIFT 11/07/14  1              24       104      6,731      $38
+ 1ST SHIFT 11/07/14  2
+ 1ST SHIFT 11/07/14  3
+ 1ST SHIFT 11/07/14  4-9         2,206     7,630    203,743   $1,606
+ 
+                             _______________________________________
+TOTAL UNSCHEDULED ORDERS         3,321    11,836    251,077   $2,076
+                             =======================================
+TOTALS INCLUDED ABOVE:
+ SINGLES (GESS)                    897       897        897      $18
+ KILL CODE 2(SPACE)
+ KILL CODE 1(NO INV.)
+
+SHIPMENT CONFIRMATION
+ SHIPPED 2ND SHIFT
+ SHIPPED 1ST SHIFT               3,018    10,949    230,927   $2,782
+                             _______________________________________
+TOTAL SHIPMENT CONFIRM           3,018    10,949    230,927   $2,782
+                             =======================================
+ 
+SUSPENDED SHIPMENTS                558     4,890    219,132   $1,102
+ 
+OTHER ORDERS:
+ OLD INPROCESS (INP)               626     2,870    191,406   $1,333
+ FUTURE DATED                       47       199      5,491     $313
+ HOLDS / ERRORS                     78     1,625    890,535       $8
